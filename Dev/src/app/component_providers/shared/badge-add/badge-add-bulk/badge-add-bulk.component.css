@@ -1,0 +1,60 @@
+.flexElement {
+  min-width: 10px;
+  min-height: 10px;
+}
+
+.flexContainer {
+  flex-direction: row;
+  min-height: 10px;
+  min-width: 10px;
+}
+
+.labelValue{
+  min-width: 150px;
+  align-content: flex-start;
+}
+
+#badgeSerialNumber{
+  min-width: 100px;
+}
+
+#batchGroup {
+  min-width: 100px;
+}
+
+#numberOfTokens {
+  min-width: 100px;
+}
+
+#numberOfBadges {
+  min-width: 100px;
+}
+
+#dashLabel {
+  width: 5px;
+  max-width: 10px;
+  text-align: center;
+}
+
+#badgeSerialNumberFirst {
+  width: 50px;
+  text-align: right;
+}
+
+#badgeSerialNumberSecond {
+  width: 65px;
+  text-align: right;
+}
+
+#badgeSerialNumberThird {
+  width: 50px;
+  text-align: right;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

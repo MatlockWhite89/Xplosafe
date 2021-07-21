@@ -1,0 +1,82 @@
+select {
+  padding: 1px 2px;
+  min-width: 110px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  /*
+  Instead of using the "gap" feature of the CSS gris implementation in the layout-wrapper.component,
+  I am using margin here to push space around each flex container that reside in the various sections
+  in said layout-wrapper.component.
+  This component fills flex-containers with elements, then are projected to the corresponding mapped
+  section within the layout-wrapper.component.
+  */
+  margin: 10px;
+}
+
+.my-caption {
+  margin-bottom: 0;
+}
+
+.flex-container > .my-tooltip {
+  align-self: flex-start;
+}
+
+.flex-container > button {
+  align-self: stretch;
+}
+
+.user-feedback {
+  margin-top: 15px;
+  min-height: 1.5em;
+  align-self: center;
+}
+
+.success {
+  color: #2eae00;
+}
+
+.fail {
+  color: #ff0000;
+}
+
+.white-on-black {
+  background-color: black;
+  color: #fff;
+}
+
+.black-on-white {
+  background-color: #fff;
+  color: black;
+}
+
+.my-tooltip .my-tooltip-text {
+  visibility: hidden;
+  border-radius: 6px 6px 6px 0;
+  padding: 3px;
+  font-style: italic;
+  font-weight: bold;
+  /* Positioning of the tooltip (if in a flex/grid container, not really relevant. */
+  position: absolute;
+  z-index: 1;
+}
+
+.my-tooltip:hover .my-tooltip-text {
+  visibility: visible;
+}
+
+.my-tooltip:after {
+  content: ' ';
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

@@ -1,0 +1,70 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <form
+      [formGroup]="userInformation"
+      class="flexContainer"
+      *ngIf="showUserForm()"
+    >
+      <div class="input-group flexElement">
+        <label>
+          User Name:
+        </label>
+          <input
+            formControlName="username"
+            type="text"
+            id="username"
+            placeholder="Username"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Password:
+        </label>
+          <input
+            formControlName="password"
+            type="text"
+            id="password"
+            placeholder="Password"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label> Location: </label>
+        <select id="location" formControlName="location" placeHolder="Location">
+          <option value="0"></option>
+          <option *ngFor="let loc of locations" value="{{ loc?.id }}">
+            {{ loc?.city }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label> Group: </label>
+        <select id="group" formControlName="group" placeHolder="Group">
+          <option value="0"></option>
+          <option *ngFor="let g of groups" value="{{ g?.id }}">
+            {{ g?.id }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label> Role: </label>
+        <select id="role" formControlName="role" placeHolder="Role">
+          <option value="0"></option>
+          <option *ngFor="let r of roles" value="{{ r?.id }}">
+            {{ r?.position }}
+          </option>
+        </select>
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!userInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="checkUserData()"
+        >
+          Add User
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+label{
+  min-width: 215px;
+  align-content: flex-start;
+}
+
+#location{
+  min-width: 100px;
+}
+
+#group {
+  min-width: 100px;
+}
+
+#role {
+  min-width: 100px;
+}
+
+#password {
+  min-width: 100px;
+}
+
+#username {
+  min-width: 100px;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}
+

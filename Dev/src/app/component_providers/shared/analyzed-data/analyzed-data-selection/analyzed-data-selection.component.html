@@ -1,0 +1,56 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Analyzed Data</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select which badges' values you wish to view.</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="analyzedInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label> Badge Serial Number: </label>
+        <select
+          formControlName="badgeSerialNumber"
+          type="text"
+          id="badgeSerialNumber"
+          placeholder="BadgeSerialNumber"
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let b of this.badgeList"
+            value="{{ b.badge_serial_number }}"
+          >
+            {{ b.badge_serial_number }}
+          </option>
+        </select>
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!analyzedInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="this.checkBadgeData()"
+        >
+          Preview Analyzed Data
+        </button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div *ngIf="this.selectedBadge && this.assignedUser && this.analyst">
+    <app-analyzed-data
+      [selectedBadge]="this.selectedBadge"
+      [assignedUserId]="this.analyzedInformation.controls.username.value"
+      [assignedUser]="this.assignedUser"
+      [analyst]="this.analyst"></app-analyzed-data>
+  </div>
+  <br>
+  <div class="flexElement">
+    <app-grid></app-grid>
+  </div>
+</div>

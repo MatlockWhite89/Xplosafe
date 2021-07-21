@@ -1,0 +1,37 @@
+<div [ngClass]="wrapperSelectors">
+  <div [ngClass]="headerSelectors">
+    <ng-content #projectedHeader select="header"></ng-content>
+  </div>
+
+  <div [ngClass]="navSelectors">
+    <ng-content #projectedNav select="nav"></ng-content>
+  </div>
+
+  <div [ngClass]="articleSelectors">
+    <ng-content #projectedArticle select="article"></ng-content>
+  </div>
+
+  <div [ngClass]="asideSelectors">
+    <ng-content #projectedAside select="aside"></ng-content>
+  </div>
+
+  <div [ngClass]="adSelectors">
+    <ng-content #projectedAd select="div"></ng-content>
+  </div>
+
+  <div [ngClass]="footerSelectors">
+    <ng-content #projectedFooter select="footer"></ng-content>
+    <!--    <ng-template #defaultFooterTemplate>-->
+    <!--      <label for="cssWrapperPicker">Style Overrider:</label>-->
+    <!--      <select id="cssWrapperPicker" [(ngModel)]="cssWrapperClass">-->
+    <!--        <option value="base-wrapper" selected>-->
+    <!--          Responsive (w/ media queries)-->
+    <!--        </option>-->
+    <!--        <option value="base-wrapper-1">One (1) Column</option>-->
+    <!--        <option value="base-wrapper-2">Two (2) Column</option>-->
+    <!--        <option value="base-wrapper-3">Three (3) Column</option>-->
+    <!--        <option value="base-wrapper-12">12 Column</option>-->
+    <!--      </select>-->
+    <!--    </ng-template>-->
+  </div>
+</div>

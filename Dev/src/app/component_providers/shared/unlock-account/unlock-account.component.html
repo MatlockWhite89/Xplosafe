@@ -1,0 +1,61 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Lock/Unlock User</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select users' account to lock/unlock</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="accountInformation"
+      class="flexContainer"
+      *ngIf="showForm()"
+    >
+      <div class="input-group flexElement">
+        <label> Unlocked Users: </label>
+        <select
+          id="unlockedAccounts"
+          formControlName="unlockedAccounts"
+          placeHolder="UnLocked Account(s)"
+        >
+          <option value="null"></option>
+          <option *ngFor="let user of unlockedUsers" value="{{ user.id }}">
+            {{ user?.username }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label> Locked Users: </label>
+        <select
+          id="lockedAccounts"
+          formControlName="lockedAccounts"
+          placeHolder="Locked Account(s)"
+        >
+          <option value="null"></option>
+          <option *ngFor="let user of lockedUsers" value="{{ user.id }}">
+            {{ user?.username }}
+          </option>
+        </select>
+      </div>
+      <div class="flexElement">
+        <button
+          class="btn btn-default"
+          type="submit"
+          id="unlockButton"
+          (click)="unlockAcct()"
+        >
+          Unlock User
+        </button>
+        <button
+        class="btn btn-default"
+        type="submit"
+        id="lockButton"
+        (click)="lockAcct()"
+      >
+        Lock User
+      </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3 *ngIf="this.userRole !== 1">
+      <b><strong>Assign Badge to Subordinate</strong></b>
+    </h3>
+    <h3 *ngIf="this.userRole === 1">
+      <b><strong>Activate Badge</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select desired badge from drop down menu or double click badge in table.</span></div>
+<!--    <div class="description"><span class="description">If no values found then there is currently no available badges.</span></div>-->
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label> Badge Serial Number: </label>
+        <select
+          formControlName="badgeSerialNumber"
+          type="text"
+          id="badgeSerialNumber"
+          placeholder="BadgeSerialNumber"
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let badge of this.badges"
+            value="{{ badge.badge_serial_number }}"
+          >
+            {{ badge.badge_serial_number }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement" *ngIf="this.userRole !== 1">
+        <label> Assigned User: </label>
+        <select
+          id="assignedUser"
+          formControlName="assignedUser"
+          placeHolder="AssignedUser"
+        >
+          <option value=""></option>
+          <option *ngFor="let user of this.users" value="{{ user.username }}">
+            {{ user.username }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Activated Time:
+        </label>
+          <input
+            formControlName="activatedTime"
+            type="datetime-local"
+            id="activatedTime"
+            placeholder="ActivatedTime"
+          />
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!badgeInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="this.checkBadgeData()"
+        >
+          {{this.buttonLabel}}
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="flexElement">
+    <app-grid></app-grid>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="pop-out" *ngIf="this.presentWindow" (click)="this.close($event)">
+  <div class="pop-out-content thumbnail" (click)="this.swallowClicks($event)">
+    <span id="pane" class="close" (click)="this.close($event)">&times;</span>
+    <!--    Components using this template within their templates need to provide content for this tag.-->
+    <ng-content></ng-content>
+  </div>
+</div>

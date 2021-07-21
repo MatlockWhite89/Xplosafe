@@ -1,0 +1,97 @@
+﻿################################################################################
+# This .tfignore file was automatically created by Microsoft(R) Visual Studio.
+#
+# Local items matching filespecs in this file will not be added to version
+# control. This file can be checked in to share exclusions with others.
+#
+# Wildcard characters are * and ?. Patterns are matched recursively unless the
+# pattern is prefixed by the \ character.
+#
+# You can prepend a path to a pattern to make it more specific. If you do,
+# wildcard characters are not permitted in the path portion.
+#
+# The # character at the beginning of a line indicates a comment.
+#
+# The ! prefix negates a pattern. This can be used to re-include an item after
+# it was excluded by a .tfignore file higher in the tree, or by the Team
+# Project Collection's global exclusions list.
+#
+# The / character is interpreted as a \ character on Windows platforms.
+#
+# Examples:
+#
+#  # Excludes all files ending in .txt in Alpha\Beta and all its subfolders.
+#  Alpha\Beta\*.txt
+#
+#  # Excludes all files ending in .cpp in this folder only.
+#  \*.cpp
+#
+#  # Excludes all files ending in .cpp in this folder and all subfolders.
+#  *.cpp
+#
+#  # If "Contoso" is a folder, then Contoso and all its children are excluded.
+#  # If it is a file, then only the "Contoso" in this folder is excluded.
+#  \Contoso
+#
+#  # If Help.exe is excluded by a higher .tfignore file or by the Team Project
+#  # Collection global exclusions list, then this pattern re-includes it in
+#  # this folder only.
+#  !\Help.exe    
+#
+################################################################################
+
+# compiled output
+/dist
+Dev/dist
+/tmp
+Dev/tmp
+/out-tsc
+Dev/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+Dev/bazel-out
+
+# dependencies
+/node_modules
+/Dev/node_modules
+/xplosafe_backend/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+/Dev/.idea
+/xplosafe_backend/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+/xplosafe_backend/public
+
+# System Files
+.DS_Store
+Thumbs.db
+*.gitkeep
+*.gitignore

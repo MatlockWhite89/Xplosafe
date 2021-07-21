@@ -1,0 +1,164 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3 *ngIf="this.userRole !== 1">
+      <b><strong>Turn In Subordinates' Activated Badge</strong></b>
+    </h3>
+    <h3 *ngIf="this.userRole === 1">
+      <b><strong>Turn In Activated Badge</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select desired badge from drop down menu or double click badge in table.</span></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label> Badge Serial Number: </label>
+        <select
+          formControlName="badgeSerialNumber"
+          type="text"
+          id="badgeSerialNumber"
+          placeholder="BadgeSerialNumber"
+          (selectionchange)="this.getSpecifiedBadge()"
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let badge of this.badges"
+            value="{{ badge.badge_serial_number }}"
+          >
+            {{ badge.badge_serial_number }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label>Ambient Temperature (&deg;F)</label>
+        <input
+          formControlName="tempFahrenheit"
+          type="text"
+          id="tempFahrenheit"
+          placeholder="Temperature Fahrenheit"
+          (keyup)="temperatureFahrenheitCalculations()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Ambient Temperature (&deg;C)</label>
+        <input
+          formControlName="tempCelsius"
+          type="text"
+          id="tempCelsius"
+          placeholder="Temperature Celsius"
+          (keyup)="temperatureCelsiusCalculations()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Relative Humidity</label>
+        <input
+          formControlName="humidity"
+          type="text"
+          id="humidity"
+          placeholder="Relative Humidity"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Activated Time:
+        </label>
+        <input
+          formControlName="activatedTime"
+          type="datetime-local"
+          id="activatedTime"
+          placeholder="ActivatedTime"
+          (selectionchange)="determineTime()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Turned In Time:
+        </label>
+          <input
+            formControlName="turnedInTime"
+            type="datetime-local"
+            id="turnedInTime"
+            placeholder="TurnedInTime"
+            (selectionchange)="determineTime()"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Duration (mins):
+        </label>
+        <input
+          formControlName="duration"
+          type="number"
+          id="duration"
+          placeholder="Duration"
+          (keyup)="durationChange()"
+          (selectionchange)="durationChange()"
+        />
+      </div>
+
+      <div class="input-group flexElement">
+        <label>Notes on Badge</label>
+        <input
+          formControlName="notes"
+          type="text"
+          id="notes"
+          placeholder="Notes..."
+        />
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class="flexElement">
+    <table>
+      <tr>
+        <td class="input-group" *ngIf="this.badge">
+          <label>Vapors Exposed (If Known)</label>
+          <input
+            id="vaporsExposed"
+            [(ngModel)]="this.searchLike"
+            (ngModelChange)="this.search()"
+          />
+          <div
+            (dblclick)="addToSelected(option)"
+            *ngFor="let option of results | slice: 0:10"
+          >
+            <div>
+              <span>{{ option.a_name }}</span>
+              <span class="glyphicon glyphicon-minus"></span>
+              <span>{{ option.a_cas }}</span>
+            </div>
+          </div>
+          <div>
+            <label> Known vapors: </label>
+            <div *ngFor="let s of this.selected">
+              <li>
+                <span>{{ s.analyteName }}</span>
+                <span class="glyphicon glyphicon-minus"></span>
+                <span>{{ s.casNumber }}</span>
+                <span class="close" (click)="this.removeSelectedAnalyte(s.casNumber)">x</span>
+              </li>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div class="flexElement">
+    <button
+      [disabled]="!badgeInformation.valid"
+      class="btn btn-default"
+      type="submit"
+      id="submitButton"
+      (click)="checkBadgeData()"
+    >
+      Turn In Badge
+    </button>
+  </div>
+  <br>
+  <div class="flexElement">
+    <app-grid></app-grid>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+/*.wrapper {*/
+/*  position: absolute;*/
+/*  justify-content: stretch;*/
+/*  background: #e1e1e1;*/
+/*  top: 10%;*/
+/*  left: 50%;*/
+/*  border-radius: 2px;*/
+/*  overflow: hidden;*/
+/*  transform: translate(-50%, -0%);*/
+/*}*/
+@import "../assets/stylesheets/skin.css";
+.otnav li a:focus {
+  background-color: #417baf;
+}
+.otnav li.top-level.active > a {
+  color: #fefefe;
+  background: #11375c;
+}
+.otnav li .dropdown-menu {
+  background-color: #417baf;
+}
+.company-logo {
+  max-width: 15%;
+  min-width: 175px;
+  height: auto;
+  max-height: 6vh;
+  min-height: 36px;
+  margin-right: auto;
+}
+
+.flex-header-container {
+  display: flex;
+  flex: 1 1 auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 5px;
+}
+
+.user-logo {
+  align-self: center;
+}
+
+.user-banner {
+  flex: 0 0 auto;
+  text-align: right;
+  align-self: center;
+  font-size: medium;
+  margin: 0;
+}
+
+.maintenance-banner {
+  flex: 1 0 auto;
+  font-size: large;
+  font-weight: bolder;
+  text-align: center;
+  align-self: center;
+  margin: auto;
+}
+
+.maintenance-banner-active {
+  background-color: #f93822;
+  color: #fdd20eff;
+}
+
+.override-footer {
+  color: #fff;
+  text-align: right;
+  width: 100%;
+  margin: 0;
+  background-color: #333;
+  padding: 10px;
+}

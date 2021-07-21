@@ -1,0 +1,45 @@
+.flex-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  padding-bottom: 15px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  margin: 10px 0;
+}
+
+.grid-2-col > label {
+  text-align: right;
+}
+
+.grid-2-col {
+  display: grid;
+  margin-right: auto;
+  gap: 10px;
+  grid-template-columns: max-content minmax(200px, 1fr);
+}
+
+.user-feedback {
+  min-height: 1.5em;
+}
+
+.success {
+  color: #2eae00;
+}
+
+.fail {
+  color: #ff0000;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}
+

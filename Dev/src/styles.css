@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+body {
+  background: white url("assets/AFRL_bkgd_image_V2.jpg") no-repeat top fixed;
+  background-size: cover;
+  font-size: 10px;
+}
+
+.ag-theme-alpine {
+  @include ag-theme-alpine();
+}
+
+@media (min-width: 500px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 700px) {
+  body {
+    font-size: 14px;
+  }
+}
+/* Use this hover function to see the various divisor elements. */
+/*div:hover {*/
+/*  background-color: paleturquoise;*/
+/*  border: 1px dashed #eeafee !important;*/
+/*  padding: 1.5%;*/
+/*  margin: 1.5%;*/
+/*}*/
+
+/*div {*/
+/*  transition:*/
+/*    margin-right, margin-left, margin-top, margin-bottom,*/
+/*    padding-right, padding-left, padding-top, padding-bottom;*/
+/*  transition-timing-function: ease-out;*/
+/*  transition-duration: 2s;*/
+/*  transition-delay: -1s;*/
+/*}*/

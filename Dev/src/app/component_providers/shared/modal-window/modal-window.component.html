@@ -1,0 +1,6 @@
+<div class="modal" *ngIf="this.presentWindow" (click)="this.close()">
+  <div class="modal-content" (click)="this.close()">
+    <span id="pane" class="close" (click)="this.close()">&times;</span>
+    <p>{{ this.contextString }}</p>
+  </div>
+</div>

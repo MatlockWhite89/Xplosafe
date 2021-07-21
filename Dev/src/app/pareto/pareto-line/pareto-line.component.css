@@ -1,0 +1,93 @@
+.flexContainer {
+  display: flex;
+  flex-flow: column wrap;
+  margin-right: 20px;
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+}
+
+.flexSubContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  /*align-items: flex-end;*/
+  height: 100%;
+  width: 100%;
+}
+
+.gridLine {
+  stroke: #222222;
+  stroke-width: 1;
+  min-width: 1px;
+  min-height: 1px;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  border-style: solid;
+  fill: #222222;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.rect .tooltiptext {
+  visibility: visible;
+  width: 120px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: -1;
+}
+
+.rect:hover .tooltiptext {
+  visibility: visible;
+}
+
+#dot {
+  alignment-baseline: center;
+  height: 6px;
+  width: 6px;
+  fill: #222222;
+  z-index: +1;
+}
+
+#line {
+  stroke: #f93822;
+  stroke-width: 3;
+  min-width: 2px;
+  min-height: 2px;
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+  fill: #f93822;
+}
+
+#parettoFooter {
+  max-width: 1ch;
+  align-content: flex-start;
+}
+
+.svg {
+  min-height: 300px;
+  min-width: 100px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}
+

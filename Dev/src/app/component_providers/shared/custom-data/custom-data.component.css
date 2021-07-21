@@ -1,0 +1,58 @@
+.outlineDiv {
+  padding: 5px;
+  border: 1px solid steelblue;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+ul {
+  max-height: 500px;
+  overflow: auto;
+  overflow-scrolling: auto;
+}
+
+.tokenContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tokenElement {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+label{
+  min-width: 140px;
+}
+
+td{
+  min-width: 200px;
+}
+Select{
+  min-width: 200px;
+}
+#activatedTime{
+  max-width: 200px;
+}
+#turnedInTime {
+  max-width: 200px;
+}
+
+#date-pick-activated{
+  min-width: 140px;
+}
+
+#date-pick-turnedIn{
+  min-width: 140px;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

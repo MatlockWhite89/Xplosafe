@@ -1,0 +1,20 @@
+label{
+  min-width: 110px;
+  align-content: flex-start;
+}
+
+#unlockedAccounts{
+  min-width: 100px;
+}
+
+#lockedAccounts {
+  min-width: 100px;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

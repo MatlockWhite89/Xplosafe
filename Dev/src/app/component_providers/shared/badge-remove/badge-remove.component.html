@@ -1,0 +1,47 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Remove Badge</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select desired badge to remove by badge serial number or double click badge in table.</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label> Badge Serial Number: </label>
+        <select
+          formControlName="badgeSerialNumber"
+          type="text"
+          id="badgeSerialNumber"
+          placeholder="BadgeSerialNumber"
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let badge of this.badges"
+            value="{{ badge.badge_serial_number }}"
+          >
+            {{ badge.badge_serial_number }}
+          </option>
+        </select>
+        <div class="flexElement">
+          <button
+            [disabled]="!badgeInformation.valid"
+            class="btn btn-default"
+            type="submit"
+            id="submitButton"
+            (click)="checkBadgeData()"
+          >
+            Remove Badge
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="flexElement">
+      <app-grid></app-grid>
+    </div>
+  </div>
+</div>

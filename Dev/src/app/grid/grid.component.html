@@ -1,0 +1,148 @@
+<app-layout-wrapper
+  [cssWrapperOverride]="cssWrapperOverrideValue"
+  [cssArticleOverride]="cssArticleOverride"
+>
+  <header *ngIf="this.gridIsSetup">
+    <form [formGroup]="gridForm" class="flexContainer">
+      <label> Column Selections: </label>
+      <ng-multiselect-dropdown
+        formControlName="columnSelection"
+        [(ngModel)]="selectedItems"
+        [settings]="dropDownSettings"
+        [placeholder]="'Column Selection'"
+        [disabled]="disabled"
+        [data]="columnSelections"
+        (onSelectAll)="setColumnViewSelectAll($event)"
+        (onSelect)="setColumnViewSelect($event)"
+        (onDeSelectAll)="setColumnViewDeSelectAll($event)"
+        (onDeSelect)="setColumnViewDeSelect($event)"
+      >
+      </ng-multiselect-dropdown>
+    </form>
+  </header>
+  <nav *ngIf="displayLegend">
+    <fieldset>
+      <legend id="fieldset-legend">Grid Legend:</legend>
+      <ul>
+        <li
+          class="legend-members"
+          *ngFor="let g of legendMembers; let i = index"
+        >
+          <span [ngStyle]="{ color: g.colourName }">
+          {{ g.legendName }} </span>
+        </li>
+      </ul>
+    </fieldset>
+  </nav>
+  <article style="width: inherit; height: inherit">
+    <ag-grid-angular
+      style="width: inherit; height: inherit"
+      #agGrid
+      class="ag-theme-alpine"
+      [gridOptions]="gridOptions"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [modules]="modules"
+      [rowSelection]="rowSelection"
+      [rowMultiSelectWithClick]="true"
+      (rowClicked)="onRowClick($event)"
+      (rowDoubleClicked)="onRowDoubleClick($event)"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </article>
+  <aside *ngIf="gridFormSetUp()">
+    <form [formGroup]="dateForm">
+      <div class="container-fluid override-bs-container">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a
+              class="btn-primary"
+              (click)="isDateFilterCollapsed = !isDateFilterCollapsed"
+              [attr.aria-expanded]="!isDateFilterCollapsed"
+              aria-controls="dateFilter"
+            >
+              <span
+                class="glyphicon"
+                [ngClass]="
+                  isDateFilterCollapsed ? 'glyphicon-plus' : 'glyphicon-minus'
+                "
+              ></span>
+              Grid Options</a
+            >
+          </div>
+          <div
+            id="dateFilter"
+            [ngbCollapse]="isDateFilterCollapsed"
+            class="panel-body"
+          >
+            <div class="panel-title">Starting Period</div>
+            <div class="panel-body">
+              <input
+                formControlName="beginningTime"
+                type="datetime-local"
+                id="beginningTime"
+                placeholder="BeginningTime"
+              />
+              <button (click)="beginningReset()">Reset</button>
+            </div>
+            <div class="panel-title">Ending Period</div>
+            <div class="panel-body">
+              <input
+                formControlName="endingTime"
+                type="datetime-local"
+                id="endingTime"
+                placeholder="EndingTime"
+              />
+              <button (click)="endingReset()">Reset</button>
+            </div>
+            <div class="panel-title">Make Pareto Diagram</div>
+            <div class="panel-body">
+              <div *ngIf="this.gridType === 6">
+                <select
+                  formControlName="desiredValue"
+                  type="text"
+                  id="desiredValue"
+                  placeholder="Select Desired Analyte"
+                >
+                  <option value=""></option>
+                  <option *ngFor="let g of this.foundAnalyteList; let i = index" value="{{g.cas_number}}">
+                    {{g.analyte_name}}
+                  </option>
+                </select>
+              </div>
+              <button (click)="makePareto()">Pareto</button>
+            </div>
+            <div class="flexContainer" id="paretoGraph" *ngIf="this.showPareto">
+              <app-pop-out-window
+                [pop-out-id]="'pareto'"
+                id="pareto"
+              >
+                <app-pareto></app-pareto>
+              </app-pop-out-window>
+            </div>
+            <div class="panel-title">Make Histogram Diagram</div>
+            <div class="panel-body">
+              <button (click)="makeHistogram()">Histogram</button>
+            </div>
+            <div *ngIf="this.showHistogram">
+              <app-pop-out-window
+                [pop-out-id]="'histogram'"
+                id="histogram"
+              >
+                <app-histogram></app-histogram>
+              </app-pop-out-window>
+            </div>
+            <div>
+              <div class="panel-title">Export</div>
+              <div class="panel-body">
+                <button (click)="exportText()">Export Pole Delimited</button>
+                <button (click)="exportCSV()">Export CSV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </aside>
+</app-layout-wrapper>

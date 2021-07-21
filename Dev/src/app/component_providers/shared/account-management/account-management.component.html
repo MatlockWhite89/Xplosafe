@@ -1,0 +1,49 @@
+<div class="flex-wrapper">
+  <h3><b><strong>Account Management</strong></b></h3>
+  <div class="description"><span class="description">Update your account information.</span></div>
+  <div></div>
+  <p class="user-feedback" [ngClass]="cssUserFeedback">
+    {{ userFeedback }}
+  </p>
+  <form [formGroup]="accountInformation" class="grid-2-col">
+    <label for="acctUser"> Username: </label
+    ><input
+      id="acctUser"
+      type="text"
+      readonly
+      formControlName="userName"
+      (change)="resetFeedback()"
+      (keypress)="resetFeedback()"
+      (keyup.enter)="updateInfo()"
+    />
+    <label for="acctPass"> New Password: </label
+    ><input
+      id="acctPass"
+      formControlName="newPassword"
+      type="password"
+      (change)="resetFeedback()"
+      (keypress)="resetFeedback()"
+      (keyup.enter)="updateInfo()"
+    />
+    <label for="passConfirm"> Retype New Password: </label
+    ><input
+      id="passConfirm"
+      formControlName="passwordConfirmation"
+      type="password"
+      (change)="resetFeedback()"
+      (keypress)="resetFeedback()"
+      (keyup.enter)="updateInfo()"
+    />
+
+    <button class="btn btn-default" (click)="resetInfo()">Reset</button>
+    <button
+      [disabled]="!accountInformation.valid"
+      class="btn btn-default"
+      type="submit"
+      (click)="updateInfo()"
+      (keypress)="resetFeedback()"
+    >
+      Update
+    </button>
+  </form>
+</div>

@@ -1,0 +1,57 @@
+label{
+  min-width: 215px;
+  align-content: flex-start;
+}
+
+#badgeSerialNumber{
+  min-width: 100px;
+}
+
+#analytes {
+  min-width: 100px;
+}
+
+#oshaPPMValue {
+  min-width: 100px;
+}
+
+#oshaMgValue {
+  min-width: 100px;
+}
+
+#twaValue {
+  min-width: 100px;
+}
+
+#twaStValue {
+  min-width: 100px;
+}
+
+#twaCValue {
+  min-width: 100px;
+}
+
+#osuSamplingRateValue {
+  min-width: 100px;
+}
+
+#detectionLimitValue {
+  min-width: 100px;
+}
+
+#activatedTime {
+  align-content: flex-start;
+}
+
+#turnedInTime {
+  align-content: flex-start;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}
+

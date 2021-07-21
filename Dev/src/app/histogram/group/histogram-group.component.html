@@ -1,0 +1,9 @@
+<div class="flexContainer">
+  <div class="flexSubContainer">
+    <app-histogram-bar
+      *ngFor="let bar of group.bars"
+      [bar]="bar"
+    ></app-histogram-bar>
+  </div>
+  <label id="bar-group-label">{{ group.barGroupName }}</label>
+</div>

@@ -1,0 +1,60 @@
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin: 25px 0;
+}
+
+.buttonGroup > button {
+  margin-right: 5px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px 25px;
+  grid-template-areas:
+    "BadgeSerialNum1 BadgeSerialNum2"
+    "RawFilename1 RawFilename2";
+}
+
+.BadgeSerialNum1 {
+  grid-area: BadgeSerialNum1;
+}
+
+.BadgeSerialNum2 {
+  grid-area: BadgeSerialNum2;
+}
+
+.RawFilename1 {
+  grid-area: RawFilename1;
+}
+
+.RawFilename2 {
+  grid-area: RawFilename2;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.flexElement {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  margin-top: 5px;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

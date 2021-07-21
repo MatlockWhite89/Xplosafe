@@ -1,0 +1,16 @@
+<div class="flexElement"><h1>
+  <b><strong>{{this.graphHeader}}</strong></b></h1>
+</div>
+<fieldset>
+  <legend id="fieldset-legend">Members:</legend>
+  <ul>
+    <li class="legend-members" *ngFor="let g of members; let i = index">
+      {{ i + 1 }}. <span [ngStyle]="{ color: g.colour }"> {{ g.colName }}</span>
+      <span class="tooltiptext">Value: {{g.id}} {{this.graphService.getUnits()}}</span>
+    </li>
+  </ul>
+</fieldset>
+<div class="flex-container">
+  <app-histogram-group *ngFor="let barGroup of groups" [group]="barGroup">
+  </app-histogram-group>
+</div>

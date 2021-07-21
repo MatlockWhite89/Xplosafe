@@ -1,0 +1,85 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Add Single Badge</strong></b>
+    </h3>
+    <div class="description"><span class="description">Creates a new badge based on the following values:</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label>
+          Badge Serial Number:
+        </label>
+          <input
+            formControlName="badgeSerialNumber"
+            type="text"
+            id="badgeSerialNumber"
+            placeholder="BadgeSerialNumber"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Batch Group:
+        </label>
+          <input
+            formControlName="batchGroup"
+            placeholder="BatchGroup"
+            id="batchGroup"
+            type="text"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Number Of Tokens:
+        </label>
+          <input
+            formControlName="numberOfTokens"
+            placeholder="NumberOfTokens"
+            id="numberOfTokens"
+            type="number"
+            (keyup)="displayTokenParameters()"
+            (change)="displayTokenParameters()"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Expiration Date:
+        </label>
+          <input
+            formControlName="expirationDate"
+            type="datetime-local"
+            id="expirationDate"
+            placeholder="ExpirationDate"
+          />
+      </div>
+<!--      <div *ngIf="this.displayTokens">-->
+      <div class="flexElement" *ngFor="let t of this.tokens">
+          <tr id="token{{t.token_id}}">
+            <app-token-values
+              (state)="handleStateUpdate($event)"
+              [token]="t">
+            </app-token-values>
+          </tr>
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!badgeInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="checkBadgeData()"
+        >
+          Add Badge
+        </button>
+      </div>
+      <div class="flexElement">
+        <app-grid></app-grid>
+      </div>
+    </form>
+  </div>
+</div>

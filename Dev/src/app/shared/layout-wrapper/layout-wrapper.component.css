@@ -1,0 +1,239 @@
+/*
+  Outside of media queries, we need a means of mapping the elements in the markup
+  to the actual template areas of our Grid. We can do this by associating the
+  grid-area property with a CSS class selector.
+*/
+.base-head
+{ grid-area: header;}
+.base-nav
+{ grid-area: nav;}
+.base-content
+{ grid-area: content;}
+.base-side
+{ grid-area: sidebar;}
+.base-ad
+{ grid-area: ad;}
+.base-footer
+{ grid-area: footer;}
+
+/*
+  This class selector uses the named template areas to create the layout. Included are the standard areas
+  typically used for a website in source order as described in the Grid Layout and Accessibility guide
+  (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/CSS_Grid_Layout_and_Accessibility).
+  Although we are not actually defining any column or row tracks here, this will be the default(mobile) layout.
+  This layout dictates a single column with rows being created as needed for each of the items in the implicit grid.
+*/
+.base-wrapper-all {
+  background-color: #e1e1e1;
+  font-size: inherit;
+}
+
+.base-wrapper {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "nav"
+    "content"
+    "sidebar"
+    "ad"
+    "footer";
+}
+
+.override-wrapper-home > .base-content {
+  padding: 15px;
+}
+.base-nav nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  max-width: 1200px;
+}
+
+.base-footer > label {
+  color: lightgray;
+  margin-right: 5px
+}
+
+.override-article-custom-data {
+  width: 100%;
+  height: 250px;
+}
+
+.override-article-badges {
+  width: 100%;
+  height: 250px;
+}
+
+.override-article-analytes {
+  width: 100%;
+  height: 250px;
+}
+
+.override-article-data-table {
+  width: 100%;
+  height: 250px;
+}
+
+.override-article-roles {
+  width: clamp(100px, 75rem, 380px);
+  height: 250px;
+}
+
+.override-article-subordinates {
+  width: clamp(100px, 75rem, 380px);
+  height: 250px;
+}
+
+.override-wrapper-edit-user {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-areas:
+      "header"
+      "content"
+      "nav"
+      "sidebar"
+      "footer"
+}
+
+.hiding-mechanism-kludge {
+  display: inherit;
+}
+
+/*
+   We can now add media queries to redefine our layout for the circumstances
+   of having enough screen real estate to show two columns.
+   The header now spans over two column tracks, as does the nav following.
+   The sidebar is now placed in the smaller column track alongside the content.
+   The ad and footer sections now share portions of the last row track.
+*/
+@media (min-width: 500px) {
+  .base-wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header  header"
+      "nav     nav"
+      "content content"
+      "ad      ad"
+      "footer  footer";
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/*
+   We can now add media queries to redefine our layout for the circumstances
+   of having enough screen real estate to show three columns.
+   The header and footer now span over three column tracks on the first and
+   last row track respectably. The sidebar with the ad section below are now
+   placed in the last column track alongside the content.
+*/
+@media (min-width: 700px) {
+  .base-wrapper {
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas:
+      "header  header  header"
+      "nav     nav     nav"
+      "ad      content sidebar"
+      "ad      content sidebar"
+      "footer  footer  footer"
+  }
+
+  .override-wrapper-home {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-areas:
+      "header  header  header  header"
+      "nav     nav     nav     nav"
+      "ad      content content sidebar"
+      "ad      content content sidebar"
+      "footer  footer  footer  footer"
+  }
+
+  .override-wrapper-login {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    gap: 20px 0;
+    grid-template-areas:
+      "header  header  header"
+      "content content content"
+      "content content content"
+      "content content content"
+      "content content content"
+      "footer  footer  footer"
+  }
+
+  .override-wrapper-edit-user {
+    display: grid;
+    gap: 0;
+    grid-template-columns: max-content max-content;
+    grid-template-areas:
+      "header  nav"
+      "content sidebar"
+      "content footer"
+  }
+
+  /*.hiding-mechanism-kludge {*/
+  /*  display: none;*/
+  /*}*/
+}
+
+/*
+  The following CSS class selectors are for the demoing of the various styles at the selection of the user.
+*/
+.base-wrapper-1 {
+  background-color: #e1e1e1;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "nav"
+    "content"
+    "sidebar"
+    "ad"
+    "footer";
+}
+
+.base-wrapper-1 > *, .base-wrapper-2 > *, .base-wrapper-3 > * {
+  /*outline: darkmagenta dotted medium;*/
+}
+
+.base-wrapper-2 {
+  background-color: #e1e1e1;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+      "header  header"
+      "nav     nav"
+      "sidebar content"
+      "ad      footer";
+}
+
+.base-wrapper-2 > nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.base-wrapper-3 {
+  background-color: #e1e1e1;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 0.75fr 4.25fr 1fr;
+  grid-template-areas:
+      "header  header  header"
+      "nav     nav     nav"
+      "sidebar content ad"
+      "footer  footer  footer"
+}
+
+.base-wrapper-3 > nav ul {
+  flex-direction: column;
+}

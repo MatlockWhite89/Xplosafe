@@ -1,0 +1,56 @@
+<form [formGroup]="fileInformation" class="flexContainer" *ngIf="showForm()">
+  <div>
+    <h3>
+      <b><strong>Download Report</strong></b>
+    </h3>
+    <div class="description"><span class="description">
+    Select desired report by double clicking report from grid.
+  </span></div>
+    <br/>
+  </div>
+  <div class="grid-container">
+    <label class="BadgeSerialNum1" for="badgeSerialNumber">
+      Badge Serial Number:
+    </label>
+    <input
+      class="BadgeSerialNum2"
+      formControlName="badgeSerialNumber"
+      id="badgeSerialNumber"
+      placeholder="Badge Serial Number"
+      type="text"
+      disabled="disabled"
+      readonly="readonly"
+    />
+    <label class="RawFilename1" for="rawFileName"> Raw Filename: </label>
+    <input
+      class="RawFilename2"
+      formControlName="rawFileName"
+      id="rawFileName"
+      placeholder="Raw Data Filename"
+      type="text"
+      disabled="disabled"
+      readonly="readonly"
+    />
+  </div>
+  <div class="buttonGroup">
+    <button
+      [disabled]="!fileInformation.valid"
+      class="btn btn-info"
+      (click)="submitButtonPressed()"
+    >
+      Download Raw File
+    </button>
+    <button
+      [disabled]="!fileInformation.valid"
+      class="btn btn-danger"
+      type="submit"
+      id="cancelButton"
+      (click)="cancelButtonPressed()"
+    >
+      Clear Search
+    </button>
+  </div>
+</form>
+<div *ngIf="showForm()">
+  <app-grid></app-grid>
+</div>

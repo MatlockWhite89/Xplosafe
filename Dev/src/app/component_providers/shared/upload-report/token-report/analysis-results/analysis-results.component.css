@@ -1,0 +1,39 @@
+.thumbnail {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+  min-width: 40%;
+  border-radius: 5px;
+}
+
+.thumbnail-description {
+  min-height: 40px;
+}
+
+.thumbnail:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+}
+
+.input-short {
+  border: none;
+  width: 100%;
+}
+
+td > * {
+  font-size: 14px;
+}
+
+.larger {
+  margin-left: 10px;
+  font-size: large;
+}
+
+.larger:hover {
+  cursor: pointer;
+  font-weight: bolder;
+  text-shadow: 1px 1px 2px red, 0 0 1em black, 0 0 0.2em black;
+}
+
+.larger:after {
+  content: "Remove";
+}

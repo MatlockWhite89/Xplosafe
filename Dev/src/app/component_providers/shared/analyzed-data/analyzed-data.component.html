@@ -1,0 +1,254 @@
+<div class="flex-container" *ngIf="this.formLoaded">
+  <div class="table-wrapper">
+    <table class="complete-table">
+      <tr>
+        <th>
+          <img
+            src="assets/XplosafeLogo.png"
+            class="xplosafe-logo"
+            alt="xplosafe logo"
+          />
+        </th>
+        <th>Dosimeter Badge Analysis Report</th>
+        <th>
+          <img
+            src="assets/airotectLogoLandscape.png"
+            class="company-logo"
+            alt="company logo"
+            align="right"
+          />
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <table class="customer-info">
+            <td>&nbsp;&nbsp;</td>
+<!--            <td>-->
+<!--              <tr><th>Customer:</th></tr>-->
+<!--              <tr>Attention: Dr. John Kelly</tr>-->
+<!--              <tr></tr>-->
+<!--              <tr>Airforce Research Laboratory</tr>-->
+<!--              <tr></tr>-->
+<!--              <tr>711th Human Performance Wing-RHBCO</tr>-->
+<!--              <tr></tr>-->
+<!--              <tr>2510 Fifth Street</tr>-->
+<!--              <tr></tr>-->
+<!--              <tr>Bldg. 840 E 215.13</tr>-->
+<!--              <tr></tr>-->
+<!--              <tr>Wright-Patterson AFB, OH 45433-7913</tr>-->
+<!--            </td>-->
+            <td>
+            <tr><th>Customer:</th></tr>
+            <tr>Attention: Jacob Kirsh</tr>
+            <tr></tr>
+            <tr>UES Inc.</tr>
+            <tr></tr>
+            <tr>4401 Dayton Xenia Rd</tr>
+            <tr></tr>
+            <tr>Dayton, Ohio 45432</tr>
+          </td>
+          </table>
+        </td>
+        <td></td>
+        <td>
+          <table class="badge-info">
+            <tr>
+              <th style="text-align: center">Badge ID #</th>
+              <th style="text-align: center">Lab Recieved</th>
+              <th style="text-align: center">Lab Reported</th>
+            </tr>
+            <tr>
+              <td>{{ this.selectedBadge.badge_serial_number }}</td>
+              <td>{{ this.selectedBadge.turned_in_time }}</td>
+              <td>{{ this.labReportedValue }}</td>
+            </tr>
+          </table>
+          <table class="client-info">
+            <tr>
+              <th>Client ID Number</th>
+              <th>Client Project ID</th>
+            </tr>
+            <tr>
+              <td>{{ this.assignedUser?.id }}</td>
+              <td>{{ this.assignedUser?.location_id }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-wrapper">
+    <table class="complete-table">
+      <tr>
+        <td>
+          <table class="lab-info">
+            <tr>
+              <th>Lab Sample ID #</th>
+              <th>Client Sample Id</th>
+              <th>Assigned User Id</th>
+              <th>Location Id</th>
+              <th>Exposure Date</th>
+              <th>Exposure Time (min)</th>
+            </tr>
+            <tr>
+              <td>{{ this.analyst?.location_id }}</td>
+              <td>{{ this.analyst?.location_id }}</td>
+              <td>{{ this.selectedBadge?.assigned_user }}</td>
+              <td *ngIf="this.wearerLocation">{{ this.wearerLocation?.city }}</td>
+              <td>{{ this.selectedBadge?.activated_time }}</td>
+              <td>{{ this.elapsedTime }}</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="analyzed-badge-info">
+            <tr>
+              <th colspan="11" scope="col"></th>
+              <th colspan="3" scope="col" class="test">Concentration</th>
+            </tr>
+            <tr>
+              <th scope="col">Badge ID #</th>
+              <th scope="col">Token #</th>
+              <th scope="col">Token Type</th>
+              <th scope="col">Analyte Name</th>
+              <th scope="col">Analyte Cas #</th>
+              <th scope="col">Analysis Method ID</th>
+              <th scope="col">Qty. Found</th>
+              <th scope="col">Units</th>
+              <th scope="col">Quantification Limit</th>
+              <th scope="col">Units</th>
+              <th scope="col">Uncertainty</th>
+<!--              <th scope="col" class="test">mg/m3</th>-->
+<!--              <th scope="col" class="test">Uncertainty</th>-->
+              <th scope="col" class="test">Found</th>
+              <th scope="col" class="test">Units</th>
+              <th scope="col" class="test">Uncertainty</th>
+            </tr>
+            <tr *ngFor="let a of this.analyzedTokenReportList">
+              <td>{{ this.selectedBadge?.badge_serial_number }}</td>
+              <td>{{ a?.token_id }}</td>
+              <td>{{ a?.token_type }}</td>
+              <td>{{ this.findAnalyteName(a?.cas_number) }}</td>
+              <td>{{ a?.cas_number }}</td>
+              <td>{{ a?.analysis_method }}</td>
+              <td>{{ a?.recorded_value | number: "1.2-2" }}</td>
+              <td *ngIf="a?.recorded_units === 'ug'"><span>&#181;</span>g</td>
+              <td *ngIf="a.recorded_units !== 'ug'">{{ a?.recorded_units }}</td>
+              <td>{{ a?.reporting_limit }}</td>
+<!--              <td>{{ a?.concentration_units }}</td>-->
+              <td *ngIf="a?.recorded_units === 'ug'"><span>&#181;</span>g</td>
+              <td *ngIf="a.recorded_units !== 'ug'">{{ a?.recorded_units }}</td>
+              <td>{{ "     " }}</td>
+<!--              <td *ngIf="a.recorded_units !== 'ug'">{{ a?.recorded_units }}</td>-->
+<!--              <td *ngIf="a?.recorded_units === 'ug'"><span>&#181;</span>g</td>-->
+<!--              <td>{{ a?.volume_concentration | number: "1.2-2" }}</td>-->
+<!--              <td></td>-->
+<!---------------------Concentration Area------------------------------------->
+              <td>{{ a?.found_concentration | number: "1.2-2" }}</td>
+              <td *ngIf="a?.recorded_units === 'ug'"><span>&#181;</span>g</td>
+              <td *ngIf="a.recorded_units !== 'ug'">{{ a?.recorded_units }}</td>
+              <td>{{ "     " }}</td>
+            </tr>
+<!------------------------Averages Area--------------------------------------->
+            <tr class="result" *ngFor="let t of this.analyzedValues">
+              <td>{{ "     " }}</td>
+              <td>{{ t?.numValues + "-token Average" }}</td>
+              <td>{{ "     " }}</td>
+              <td>{{ this.findAnalyteName(t?.casNum) }}</td>
+              <td>{{ t?.casNum }}</td>
+              <td>{{ "     " }}</td>
+              <td>{{ t?.averageQtyFound | number: "1.2-2" }}</td>
+              <td *ngIf="t?.foundUnits === 'ug'"><span>&#181;</span>g</td>
+              <td *ngIf="t?.foundUnits !== 'ug'">{{ t?.foundUnits }}</td>
+              <td>{{ "     " }}</td>
+              <td *ngIf="t?.foundUnits === 'ug'"><span>&#181;</span>g</td>
+              <td *ngIf="t?.foundUnits !== 'ug'">{{ t?.foundUnits }}</td>
+              <td><span>&#xb1;</span> {{ t?.standardDeviationAverage | number: "1.2-2" }}</td>
+<!--              <td>{{ t?.averageVolumeConcentration | number: "1.2-2" }}</td>-->
+<!--              <td><span>&#xb1;</span> {{ t?.standardDeviationVolume | number: "1.2-2" }}</td>-->
+              <td>{{ t?.averageFoundConcentration | number: "1.2-2" }}</td>
+<!--              <td>{{ t?.concentrationUnits }}</td>-->
+              <td *ngIf="t?.concentrationUnits !== 'PPB'"><span>&#181;</span>g</td>
+              <td *ngIf="t?.concentrationUnits === 'PPB'">ng</td>
+              <td><span>&#xb1;</span> {{ t?.standardDeviationConcentration | number: "1.2-2" }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-wrapper">
+    <table class="complete-table">
+      <tr>
+        <td>
+          <table class="analysis-info">
+            <tr>
+              <th>Analysis Performed By</th>
+              <th>Analysis Date(s)</th>
+              <th>Analysis Lab Code</th>
+            </tr>
+            <tr>
+              <td>{{ this.analyst?.username }}</td>
+              <td>{{ this.labReportedValue }}</td>
+              <td *ngIf="this.analystLocation">
+                {{ this.analystLocation?.city }}
+              </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="method-info">
+            <tr>
+              <th>Test Code</th>
+              <th>Analytes Requested</th>
+              <th>Method Reference</th>
+              <th>Regulatory Agency</th>
+              <th>TWA Limit</th>
+              <th>STEL Limit</th>
+              <th>Units</th>
+            </tr>
+            <!--        The Following is missing some pertinent Info from the client and the Measurement Units may change. -->
+            <tr *ngFor="let a of this.analytesFound">
+              <td *ngIf="findMethod(a?.cas_number) === 'Solvent Extraction'">Recollect</td>
+              <td *ngIf="findMethod(a?.cas_number) !== 'Solvent Extraction'">Standard</td>
+              <td>{{ a?.analyte_name + " (" + a?.cas_number + ")" }}</td>
+              <td>{{ this.findMethod(a?.cas_number) }}</td>
+              <td>OSHA</td>
+              <td>{{ a?.cal_osha_pel_8_hour_twa_c }}</td>
+              <td>{{ a?.cal_osha_pel_8_hour_twa_st }}</td>
+              <td><span>&#181;</span>g</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="disclaimer-info">
+            <th>*****Disclaimer****</th>
+            <tr>
+              <td>
+                {{ this.disclaimerInfo }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="footer-info">
+            <th>712 Eastgate Street</th>
+            <th>Stillwater, OK 74074</th>
+            <th>(405)334-5720</th>
+            <th>www.xplosafe.com</th>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

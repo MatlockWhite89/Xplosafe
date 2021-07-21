@@ -1,0 +1,75 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Site Management</strong></b>
+    </h3>
+    <div class="description"><span class="description">Add a new location by filling out the appropriate fields.</span></div>
+    <div class="description"><span class="description">Edit an existing location by double clicking an existing location from the table.</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="locationInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label>
+          City:
+        </label>
+        <input
+          formControlName="city"
+          type="text"
+          id="city"
+          placeholder=""
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          State:
+        </label>
+        <input
+          formControlName="state"
+          placeholder=""
+          id="state"
+          type="text"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Country:
+        </label>
+        <input
+          formControlName="country"
+          placeholder=""
+          id="country"
+          type="text"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          base:
+        </label>
+        <input
+          formControlName="base"
+          type="text"
+          id="base"
+          placeholder=""
+        />
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!locationInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="checkLocationData()"
+        >
+          Submit Location
+        </button>
+      </div>
+      <div class="flexElement">
+        <app-grid></app-grid>
+      </div>
+    </form>
+  </div>
+</div>

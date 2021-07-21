@@ -1,0 +1,62 @@
+@import "../../assets/stylesheets/skin.css";
+
+.flexHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex: 0 1 auto;
+  max-width: 1200px;
+  overflow-x: -moz-scrollbars-horizontal;
+  overflow-scrolling: auto;
+}
+
+.flexHeader > ul {
+  max-width: 1200px;
+  overflow-x: -moz-scrollbars-horizontal;
+  overflow-scrolling: auto;
+}
+
+ul li a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px;
+  white-space: nowrap
+}
+
+span {
+  font-size: small;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.headerLogo {
+  flex-direction: row;
+  max-width: 35%;
+  height: auto;
+}
+
+/*.routerTab {*/
+/*  background: slategray;*/
+/*}*/
+
+/*.routerTab > a {*/
+/*  color: black;*/
+/*}*/
+
+/*.activeTab > a {
+  font-size: large;
+  font-weight: bold;
+}*/
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

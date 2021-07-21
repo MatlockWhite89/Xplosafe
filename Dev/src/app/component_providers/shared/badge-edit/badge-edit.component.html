@@ -1,0 +1,138 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Edit Subordinates' Badge</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select desired badge information to update by badge serial number or double click badge in table.</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label>
+          Badge Serial Number:
+        </label>
+          <input
+            formControlName="badgeSerialNumber"
+            type="text"
+            id="badgeSerialNumber"
+            placeholder="BadgeSerialNumber"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label> Assigned User: </label>
+        <select
+          id="assignedUser"
+          formControlName="assignedUser"
+          placeHolder="AssignedUser"
+        >
+          <option value="null"></option>
+          <option *ngFor="let user of this.users" value="{{ user?.username }}">
+            {{ user?.username }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Activated Time:
+        </label>
+          <input
+            formControlName="activatedTime"
+            type="datetime-local"
+            id="activatedTime"
+            placeholder="ActivatedTime"
+            (selectionchange)="determineTime()"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Turned In Time:
+        </label>
+          <input
+            formControlName="turnedInTime"
+            type="datetime-local"
+            id="turnedInTime"
+            placeholder="TurnedInTime"
+            (selectionchange)="determineTime()"
+          />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Duration (mins):
+        </label>
+        <input
+          formControlName="duration"
+          type="number"
+          id="duration"
+          placeholder="Duration"
+          (keyup)="durationChange()"
+          (selectionchange)="durationChange()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Ambient Temperature (&deg;F)</label>
+        <input
+          formControlName="tempFahrenheit"
+          type="text"
+          id="tempFahrenheit"
+          placeholder="Temperature Fahrenheit"
+          (keyup)="temperatureFahrenheitCalculations()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Ambient Temperature (&deg;C)</label>
+        <input
+          formControlName="tempCelsius"
+          type="text"
+          id="tempCelsius"
+          placeholder="Temperature Celsius"
+          (keyup)="temperatureCelsiusCalculations()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Relative Humidity</label>
+        <input
+          formControlName="humidity"
+          type="text"
+          id="humidity"
+          placeholder="Relative Humidity"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Vapors Exposed (If Known)</label>
+        <input
+          formControlName="vaporsExposed"
+          type="text"
+          id="vaporsExposed"
+          placeholder="Vapors Exposed"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>Notes on Badge</label>
+        <input
+          formControlName="notes"
+          type="text"
+          id="notes"
+          placeholder="Notes..."
+        />
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!badgeInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="checkBadgeData()"
+        >
+          Submit Changes
+        </button>
+      </div>
+      <div class="flexElement">
+        <app-grid></app-grid>
+      </div>
+    </form>
+  </div>
+</div>

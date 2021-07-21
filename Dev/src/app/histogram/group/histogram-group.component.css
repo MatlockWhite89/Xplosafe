@@ -1,0 +1,20 @@
+.flexContainer {
+  display: flex;
+  flex-flow: column wrap;
+  margin-right: 20px;
+  border: 1px solid black;
+}
+
+.flexSubContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+}
+
+.flexSubContainer > app-histogram-bar {
+  margin: 0 3px;
+}
+
+#bar-group-label {
+  text-align: center;
+}

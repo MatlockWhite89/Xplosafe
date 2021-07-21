@@ -1,0 +1,17 @@
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  height: inherit;
+}
+
+button {
+  min-width: 200px;
+}
+
+.flexContainer > label {
+  font-family: "Arial Narrow", serif;
+  font-size: 1.25em;
+  text-align: center;
+}

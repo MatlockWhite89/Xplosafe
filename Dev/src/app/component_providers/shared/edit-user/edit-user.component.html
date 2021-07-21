@@ -1,0 +1,105 @@
+<app-layout-wrapper
+  [formGroup]="this.formContext"
+  [cssWrapperOverride]="cssWrapperOverrideValue"
+>
+  <header *ngIf="userSelected">
+    <h3 class="my-caption"><b><strong>Current User Settings</strong></b></h3>
+  </header>
+
+  <nav *ngIf="userSelected">
+    <h3 class="my-caption"><b><strong>Edit User Settings</strong></b></h3>
+  </nav>
+
+  <article class="flex-container">
+    <label>Username: <input type="text" readonly [value]="userName" /></label>
+    <label
+      >Current Location:
+      <input type="text" readonly [value]="currentLocation | locationConverter"
+    /></label>
+    <label
+      >Current Role:
+      <input type="text" readonly [value]="currentRole | userRoleConverter"
+    /></label>
+    <label
+      >Current Group: <input type="text" readonly [value]="currentGroup"
+    /></label>
+    <label
+      >Created on: <input type="text" readonly [value]="createdOn"
+    /></label>
+    <label
+      >Updated on: <input type="text" readonly [value]="updatedOn"
+    /></label>
+  </article>
+
+  <aside class="flex-container" *ngIf="userSelected">
+    <label class="my-tooltip">
+      <img
+        src="assets/lock_black_36px.png"
+        alt="Account Locked"
+        *ngIf="lockStatus"
+        (click)="this.toggleLockStatus(false)"
+      />
+      <img
+        src="assets/lock_open_black_36px.png"
+        alt="Account Unlocked"
+        *ngIf="!lockStatus"
+        (click)="this.toggleLockStatus(true)"
+      />
+      <span
+        class="my-tooltip-text"
+        [ngClass]="lockStatus ? 'white-on-black' : 'black-on-white'"
+      >
+        <span *ngIf="!lockStatus">"Click to lock account"</span>
+        <span *ngIf="lockStatus">"Click to unlock account"</span>
+      </span>
+    </label>
+    <label
+      >New Password: <input type="password" formControlName="newPassword"
+    /></label>
+    <label
+      >New Location:
+      <select formControlName="locationId">
+        <option value=""></option>
+        <option
+          *ngFor="let l of locations$ | async"
+          ngDefaultControl
+          [label]="l.id | locationConverter"
+          [value]="l.id"
+          [hidden]="l.id === currentLocation"
+        ></option></select
+    ></label>
+    <label
+      >New Role:
+      <select formControlName="roleId">
+        <option value=""></option>
+        <option
+          *ngFor="let r of roles$ | async"
+          ngDefaultControl
+          [label]="r.id | userRoleConverter"
+          [value]="r.id"
+          [hidden]="r.id === currentRole"
+        ></option></select
+    ></label>
+    <label
+      >New Group:
+      <select formControlName="groupId">
+        <option value=""></option>
+        <option
+          *ngFor="let g of groups$ | async"
+          ngDefaultControl
+          [label]="g.id"
+          [value]="g.id"
+          [hidden]="g.id === currentGroup"
+        ></option></select
+    ></label>
+    <p class="user-feedback" [ngClass]="cssUserFeedback">
+      {{ userFeedback }}
+    </p>
+  </aside>
+
+  <footer class="flex-container" *ngIf="userSelected">
+    <button class="btn btn-primary" type="submit" (click)="updateInfo()">
+      Update
+    </button>
+  </footer>
+</app-layout-wrapper>

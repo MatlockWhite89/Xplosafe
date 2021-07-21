@@ -1,0 +1,34 @@
+label{
+  min-width: 185px;
+  align-content: flex-start;
+}
+
+#badgeSerialNumber{
+  min-width: 100px;
+}
+
+#assignedUser {
+  min-width: 100px;
+}
+
+#activatedTime {
+  align-content: flex-start;
+}
+
+#turnedInTime {
+  align-content: flex-start;
+}
+
+#notes {
+  align-content: flex-start;
+  min-width: 222.85px;
+  min-height: 100px;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

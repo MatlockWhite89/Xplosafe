@@ -1,0 +1,78 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <div class="tokenRow">
+      <label>Token {{this.token.token_id}}</label>
+      <form
+        [formGroup]="this.tokenInformation"
+        class="flexContainer"
+      >
+        <label> State: </label>
+        <select
+          formControlName="tokenState"
+          type="text"
+          id="tokenState"
+          (change)="this.determineIfBlank()"
+        >
+          <option
+            *ngFor="let state of this.tokenStates"
+            value="{{ state.state }}"
+          >
+            {{ state.state }}
+          </option>
+        </select>
+        <label style="text-align: right"> Type: </label>
+        <select
+          formControlName="tokenType"
+          type="text"
+          id="tokenType"
+          style="text-align: right"
+          (change)="this.changeTokenType()"
+        >
+          <option
+            *ngFor="let type of this.tokenTypes"
+            value="{{ type.token_type_name }}"
+          >
+            {{ type.token_type_name }}
+          </option>
+        </select>
+      </form>
+
+      <div class="flexElement">
+        <table>
+          <tr>
+            <td class="input-group flexElement" *ngIf="!tokenBlank">
+              <label>Search with name or CAS:</label>
+              <input
+                id="targetAnalyte"
+                [(ngModel)]="this.searchLike"
+                (ngModelChange)="this.search()"
+              />
+              <div
+                (dblclick)="addToSelected(option)"
+                *ngFor="let option of results | slice: 0:10"
+              >
+                <div>
+                  <span>{{ option.a_name }}</span>
+                  <span class="glyphicon glyphicon-minus"></span>
+                  <span>{{ option.a_cas }}</span>
+                </div>
+              </div>
+              <div>
+                <label> TargetAnalyte(s): </label>
+                <div *ngFor="let s of this.selected">
+                  <li>
+                    <span>{{ s.analyteName }}</span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <span>{{ s.casNumber }}</span>
+                    <span class="close" (click)="this.removeSelectedAnalyte(s.casNumber)">x</span>
+                  </li>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <br/>
+  </div>
+</div>

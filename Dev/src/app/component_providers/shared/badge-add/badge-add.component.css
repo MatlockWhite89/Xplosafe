@@ -1,0 +1,39 @@
+.flexElement {
+  min-width: 10px;
+  min-height: 10px;
+}
+
+.flexContainer {
+  flex-direction: row;
+  min-height: 10px;
+  min-width: 10px;
+}
+
+label{
+  min-width: 150px;
+  align-content: flex-start;
+}
+
+#badgeSerialNumber{
+  min-width: 100px;
+}
+
+#batchGroup {
+  min-width: 100px;
+}
+
+#numberOfTokens {
+  min-width: 100px;
+}
+
+#expirationDate {
+  align-content: flex-start;
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

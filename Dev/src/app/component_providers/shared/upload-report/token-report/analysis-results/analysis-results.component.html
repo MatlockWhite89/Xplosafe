@@ -1,0 +1,190 @@
+<div class="row">
+  <div class="col-md-1">&nbsp;</div>
+  <div class="col-md-10">
+    <div *ngIf="this.determineTokenFormState()">
+      <div class="row">
+        <div class="caption text-center">
+          <h4>
+            Analysis Report for Badge:
+            <strong>{{ this.tokenFormData.badge_serial_number }}</strong> - Token
+            #<strong>{{ this.tokenFormData.tube_number }}</strong>
+          </h4>
+          <span>Token is listed as a blank.</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!this.determineTokenFormState()">
+      <div class="row">
+        <div class="caption text-center">
+          <h4 id="thumbnail-label">
+            Analysis Report for Badge:
+            <strong>{{ this.tokenFormData.badge_serial_number }}</strong> - Token
+            #<strong>{{ this.tokenFormData.tube_number }}</strong>
+          </h4>
+          <div class="thumbnail-description smaller">
+            Compose an analysis report by first selecting the compounds requested.
+          </div>
+          <div class="row">
+            <div class="col-xs-2">&nbsp;</div>
+            <label class="col-xs-3 text-right">Search with name or CAS:</label>
+            <input
+              class="col-xs-4"
+              [(ngModel)]="searchLike"
+              (ngModelChange)="this.search()"
+            />
+          </div>
+          <div
+            (dblclick)="addToSelected(option)"
+            class="row"
+            *ngFor="let option of results | slice: 0:10"
+          >
+            <div class="col-xs-5">&nbsp;</div>
+            <div class="col-xs-7 text-left">
+              <span>{{ option.a_name }}</span>
+              <span class="glyphicon glyphicon-minus"></span>
+              <span>{{ option.a_cas }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="caption card-footer text-center">
+          <table class="table-responsive">
+            <thead>
+              <tr>
+                <th>Compound Requested</th>
+                <th>Quantity Found</th>
+                <th>Units</th>
+                <th>Volume Concentration (mg/m<sup>3</sup>)</th>
+                <th>Found Concentration</th>
+                <th>Units</th>
+                <th>Token Type</th>
+                <th>Analysis Method</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let compound of selected; index as i">
+                <td>
+                  <input
+                    id="compoundName{{i}}"
+                    readonly
+                    class="input-sm input-short"
+                    value="{{ compound.compound }}"
+                  />
+                </td>
+                <td>
+                  <input
+                    id="quantityFound{{i}}"
+                    class="input-sm input-short"
+                    numericOnly
+                    value="{{ compound.quantityFound }}"
+                    [(ngModel)]="compound.quantityFound"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                    (change)="this.quantityFoundCalculations(i, compound.quantityFound);"
+                  />
+                </td>
+                <td>
+                  <select
+                    id="unit{{i}}"
+                    class="input-sm"
+                    value="{{ compound.unit }}"
+                    [(ngModel)]="compound.unit"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                    (change)="this.reevaluateQuantityFound(i);"
+                  >
+                    <option value="ug">&#181;g</option>
+                    <option value="ng">ng</option>
+                  </select>
+                </td>
+                <td>
+                  <input
+                    id="volumeConcentration{{i}}"
+                    class="input-sm input-short"
+                    numericOnly
+                    value="{{ compound.volume_concentration.toExponential(3) }}"
+                    [(ngModel)]="compound.volume_concentration"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                  />
+                </td>
+                <td>
+                  <input
+                    id="foundConcentration{{i}}"
+                    class="input-sm input-short"
+                    numericOnly
+                    value="{{ compound.found_concentration.toExponential(3) }}"
+                    [(ngModel)]="compound.found_concentration"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                  />
+                </td>
+                <td>
+                  <select
+                    id="concentrationUnits{{i}}"
+                    class="input-sm"
+                    value="{{ compound.concentration_units }}"
+                    [(ngModel)]="compound.concentration_units"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                    (change)="this.determineConcentrationFound(i)"
+                  >
+                    <option value="PPB">PPB</option>
+                    <option value="PPM">PPM</option>
+                  </select>
+                </td>
+                <td>
+                  <select
+                    id="tokenType{{i}}"
+                    class="input-sm"
+                    value="{{ compound.token_type }}"
+                    [(ngModel)]="compound.token_type"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                  >
+                    <option *ngFor="let t of this.tokenTypeList" value="{{t.token_type_name}}">{{t.token_type_name}}</option>
+                  </select>
+                </td>
+                <td>
+                  <select
+                    id="analysisMethod{{i}}"
+                    class="input-sm"
+                    value="{{ compound.analysis_method }}"
+                    [(ngModel)]="compound.analysis_method"
+                    (ngModelChange)="this.state.emit('MODIFIED')"
+                  >
+                    <option *ngFor="let m of this.methodList" value="{{m.method_name}}">{{m.method_name}}</option>
+                  </select>
+                </td>
+                <td>
+                  <span class="close larger" (click)="this.remove(compound)"
+                    ><strong>&times;</strong></span
+                  >
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <label style="margin-top: 15px">
+                    Comments:
+                    <textarea
+                      maxlength="255"
+                      placeholder="Enter any additional details."
+                      [(ngModel)]="this.comments"
+                      (ngModelChange)="this.state.emit('MODIFIED')"
+                    ></textarea>
+                  </label>
+                </td>
+                <td colspan="3">
+                  <button
+                    class="btn btn-primary"
+                    (click)="submit()"
+                    [disabled]="selected.length < 1"
+                  >
+                    Save
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">&nbsp;</div>
+</div>

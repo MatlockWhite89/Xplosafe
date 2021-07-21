@@ -1,0 +1,11 @@
+<label class="element">{{ bar.height }}</label>
+<div
+  id="coloredBar"
+  class="element"
+  [style.height.px]="bar.height + 10"
+  [style.background]="bar.colour"
+>
+  <span class="tooltiptext">
+    {{bar.colName}}
+  </span>
+</div>

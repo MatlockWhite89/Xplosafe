@@ -1,0 +1,40 @@
+<div ngSwitch="{{ tabby?.activeId }}">
+  <div *ngSwitchCase="'edit'">
+    <h3>
+      <b><strong>
+        Edit Subordinates' Information
+      </strong></b>
+    </h3>
+    <div class="description"><span class="description">Pick one of the following users to manage their information.</span></div>
+  </div>
+  <div *ngSwitchCase="'create'">
+    <h3>
+      <b><strong>
+        Create New Subordinate
+      </strong></b>
+    </h3>
+    <div class="description"><span class="description">Fill out the form to add a new user to your subordinates.</span></div>
+  </div>
+  <div *ngSwitchDefault>
+  <h3>
+    <b><strong>
+    </strong></b></h3>
+    <div class="description"><span class="description">Select an option to continue...</span></div>
+  </div>
+</div>
+<ngb-tabset #tabby activeId="edit" [destroyOnHide]="false">
+  <ngb-tab id="edit" title="Edit User">
+    <ng-template ngbTabContent>
+      <div class="grid-container">
+        <app-grid class="subordinates-area"></app-grid>
+        <app-edit-user class="edit-user-area"></app-edit-user>
+      </div>
+    </ng-template>
+  </ngb-tab>
+
+  <ngb-tab id="create" title="Create User">
+    <ng-template ngbTabContent>
+      <app-create-user></app-create-user>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

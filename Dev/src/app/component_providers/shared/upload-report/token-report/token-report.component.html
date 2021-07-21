@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="panel-group">
+    <div class="panel" [ngClass]="this.tokenFormData.getClassForCurrentState()">
+      <div class="panel-heading" appCollapse appHover>
+        <h4 class="panel-title">
+          Tube Number: {{ this.tokenFormData.tube_number }}
+        </h4>
+      </div>
+      <div class="collapse">
+        <div class="panel-body">
+          <div
+            *ngIf="
+              tokenFormData.original_filename;
+              then thenFileBlock;
+              else elseFileBlock
+            "
+          ></div>
+          <ng-template #thenFileBlock>
+            <h5>Previous file found uploaded for this token.</h5>
+            <ul>
+              <li>
+                <label> Filename: {{ tokenFormData.original_filename }}</label>
+              </li>
+            </ul>
+          </ng-template>
+          <ng-template #elseFileBlock>
+            <h5>Add a file to the upload queue</h5>
+          </ng-template>
+          <label for="{{ this.uniqueUploaderName }}" class="custom-file-upload">
+            <i class="glyphicon glyphicon-cloud-upload"></i> Choose File
+          </label>
+          <input
+            id="{{ this.uniqueUploaderName }}"
+            type="file"
+            name="{{ this.uniqueUploaderName }}"
+            ng2FileSelect
+            [uploader]="uploader"
+          />
+          <div
+            *ngIf="
+              this.requestedCompounds.length > 0;
+              then thenCompoundBlock;
+              else elseCompoundBlock
+            "
+          ></div>
+          <ng-template #thenCompoundBlock>
+            <h5>Previous requested compounds this token.</h5>
+            <ul>
+              <li *ngFor="let compound of this.requestedCompounds">
+                {{ compound | slice: 0:10 }}
+              </li>
+            </ul>
+          </ng-template>
+          <ng-template #elseCompoundBlock>
+            <h5>
+              Provide the compounds requested with their found analyzed
+              quantities
+            </h5>
+          </ng-template>
+          <label
+            for="{{ this.uniquePopoutName }}"
+            class="custom-file-upload"
+            (click)="this.showAnalyzedValues($event)"
+          >
+            <i class="glyphicon glyphicon-comment"></i> Add Analyzed Value(s)
+          </label>
+          <app-pop-out-window
+            [pop-out-id]="this.uniquePopoutName"
+            id="{{ this.uniquePopoutName }}"
+          >
+            <app-analysis-results
+              [tokenFormData]="this.tokenFormData"
+              [badgeList]="this.badgeList"
+              [tokenTypeList]="this.tokenTypeList"
+              [analyteList]="this.analyteList"
+              [methodList]="this.methodList"
+              (state)="handleStateUpdate($event)"
+              (compounds)="this.requestedCompounds = $event"
+            ></app-analysis-results>
+          </app-pop-out-window>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

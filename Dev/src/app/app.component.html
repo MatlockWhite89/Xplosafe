@@ -1,0 +1,79 @@
+<app-layout-wrapper [cssWrapperOverride]="cssWrapperOverrideValue">
+  <header [ngClass]="maintenanceText !== '' ? 'maintenance-banner-active' : ''">
+    <div
+      class="flex-header-container"
+      [ngClass]="maintenanceText !== '' ? 'maintenance-banner-active' : ''"
+    >
+      <img
+        src="assets/airotectLogoLandscape.png"
+        class="company-logo"
+        alt="company logo"
+      />
+      <label
+        class="maintenance-banner maintenance-banner-active"
+        [hidden]="maintenanceText === ''"
+      >
+        {{ maintenanceText }}
+      </label>
+      <label class="user-banner">{{ this.user.username }}</label>
+      <img
+        src="assets/account_circle_black_36px.png"
+        class="user-logo"
+        alt="user logo"
+      />
+    </div>
+  </header>
+  <nav>
+    <ul class="otnav nav nav-main">
+      <li
+        class="top-level"
+        *ngFor="let route of this.user.routes"
+        routerLinkActive="active"
+      >
+        <ng-container
+          *ngIf="route.hasOwnProperty('children'); then subRoutes; else normal"
+        >
+        </ng-container>
+        <!--------------- For the routes without nested routes. --------------->
+        <ng-template #normal>
+          <a
+            *ngIf="!route.hasOwnProperty('children')"
+            [routerLink]="['/' + route.path]"
+            >{{ route.label }}</a
+          >
+        </ng-template>
+
+        <!--------------- For the routes with nested routes.    --------------->
+        <ng-template #subRoutes>
+          <a *ngIf="route.hasOwnProperty('children')"
+            >{{ route.label }}
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </a>
+          <ul class="dropdown-menu" *ngIf="route.hasOwnProperty('children')">
+            <li class="dm" *ngFor="let childRoute of route.children">
+              <a
+                [routerLink]="[
+                    '/' +
+                    route.path +
+                    '/' +
+                    childRoute.path
+                ]"
+                >{{ childRoute.label }}</a
+              >
+            </li>
+          </ul>
+        </ng-template>
+        <!-------------------------------------------------------------------->
+      </li>
+    </ul>
+  </nav>
+  <article>
+    <router-outlet></router-outlet>
+  </article>
+  <aside></aside>
+  <div></div>
+  <footer>
+    <label class="override-footer">Powered by Angular - Long Wave Inc.</label>
+  </footer>
+</app-layout-wrapper>
+<app-modal-window></app-modal-window>

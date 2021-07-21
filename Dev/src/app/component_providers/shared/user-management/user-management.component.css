@@ -1,0 +1,49 @@
+
+/*/html/body/app-root/app-layout-wrapper/div/div[3]/article/app-user-management/ngb-tabset/ul/li[1]/a*/
+/*#management-functions a {*/
+/*  margin-right: -1px;*/
+/*  border: 1px solid black;*/
+/*}*/
+/*.nav-pills a {*/
+/*  margin-right: -1px;*/
+/*  border: 1px solid black;*/
+/*}*/
+
+.grid-container {
+  display: grid;
+  gap: 15px 0;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "subordinates-area"
+    "edit-user-area";
+  margin-right: auto;
+  justify-items: center;
+}
+
+.subordinates-area {
+  grid-area: subordinates-area;
+}
+
+.edit-user-area {
+  grid-area: edit-user-area;
+}
+
+@media (min-width: 1200px) {
+  .grid-container {
+    display: grid;
+    gap: 0 20px;
+    grid-template-columns: min-content min-content;
+    grid-template-areas:
+    "subordinates-area edit-user-area"
+    "subordinates-area edit-user-area";
+    justify-items: center;
+  }
+}
+
+.description {
+  align-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  -webkit-text-fill-color: #666666;
+  /*background-color: blanchedalmond;*/
+}

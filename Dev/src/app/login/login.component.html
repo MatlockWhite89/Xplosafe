@@ -1,0 +1,95 @@
+<app-layout-wrapper cssWrapperOverride="override-wrapper-login">
+  <header class="flex-container user-feedback">
+    <p
+      [hidden]="error === ''"
+      style="background-color: #f93822ff; color: #fdd20eff"
+    >
+      {{ error }}
+    </p>
+  </header>
+
+  <article>
+    <!--  The Government Warning Banner Component -->
+    <div *ngIf="showGovernmentWarning()">
+      <app-government-warning></app-government-warning>
+    </div>
+    <!--  The HIPAA Agreement Banner Component -->
+    <div *ngIf="showHipaaAgreement()">
+      <app-hipaa-warning></app-hipaa-warning>
+    </div>
+    <!--  The Login Component -->
+    <div *ngIf="showLoginForm()">
+      <div class="flex-container">
+        <label for="usr"> Username:</label>
+        <input
+          id="usr"
+          (keydown)="resetErrorText()"
+          autocomplete="username"
+          placeholder="Username"
+          type="text"
+          [(ngModel)]="username"
+        />
+        <span class="input-group-addon flex-span"
+          ><i class="glyphicon glyphicon-user"></i
+        ></span>
+      </div>
+
+      <div class="flex-container">
+        <label for="pw"> Password:</label>
+        <input
+          id="pw"
+          (keydown)="resetErrorText()"
+          (keydown.enter)="onLogin()"
+          autocomplete="current-password"
+          placeholder="Password"
+          type="password"
+          [(ngModel)]="password"
+        />
+        <span class="input-group-addon flex-span"
+          ><i class="glyphicon glyphicon-lock"></i
+        ></span>
+      </div>
+
+      <div
+        *ngIf="passwordIsExpired"
+        class="flex-container custom-margin-right-1"
+      >
+        <label for="new_password"> New Password:</label>
+        <input
+          id="new_password"
+          (keydown)="resetErrorText()"
+          (keydown.enter)="onLogin()"
+          placeholder="New Password"
+          type="password"
+          [(ngModel)]="newPassword"
+        />
+        <span class="input-group-addon flex-span"
+          ><i class="glyphicon glyphicon-lock"></i
+        ></span>
+      </div>
+
+      <div
+        *ngIf="passwordIsExpired"
+        class="flex-container custom-margin-right-2"
+      >
+        <label for="confirm_password"> Confirm Password:</label>
+        <input
+          id="confirm_password"
+          (keydown)="resetErrorText()"
+          (keydown.enter)="onLogin()"
+          placeholder="Confirm Password"
+          type="password"
+          [(ngModel)]="confirmPassword"
+        />
+        <span class="input-group-addon flex-span"
+          ><i class="glyphicon glyphicon-lock"></i
+        ></span>
+      </div>
+    </div>
+  </article>
+  <footer *ngIf="showLoginForm()" class="flex-container">
+    <button class="btn btn-primary" type="submit" (click)="onLogin()">
+      {{ buttonText }}
+    </button>
+  </footer>
+</app-layout-wrapper>

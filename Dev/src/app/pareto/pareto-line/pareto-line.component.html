@@ -1,0 +1,24 @@
+<div class="flexContainer" id = "container">
+  <div class="flexSubContainer" id="flexSubContainer">
+    <svg #svg1 class="svg" id="svg1">
+      <g><text style="height: 30px; width: 100%; align-content: center">
+        <tspan id="parettoHeader">{{this.graphHeader}}</tspan>
+      </text></g>
+      <g transform="translate(25,25)">
+        <text>
+          <tspan *ngFor="let c of this.unitsArray index as i"  id="parettoFooter{{i}}">{{c}}</tspan>
+        </text>
+      </g>
+      <g><text style="height: 100%; width: 30px;">
+        <tspan *ngFor="let v of this.yVertices" id="y{{v}}">{{v}}</tspan>
+      </text></g>
+      <g><text style="height: 100%; width: 30px;"><tspan id="zeroValue">0</tspan></text></g>
+      <line id="baseline" class="gridLine"></line>
+      <line *ngFor="let v of this.yVertices" id="{{v}}" class="gridLine"></line>
+      <line *ngFor="let l of this.lines" id="{{l.id}}"></line>
+      <circle *ngFor="let d of this.dots" id ="{{d.id}}"></circle>
+      <rect *ngFor="let b of this.bars" id="{{b.id}}"></rect>
+      <text *ngFor="let b of this.bars; index as i" id="text{{b.id}}">{{i+1}}</text>
+    </svg>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+  <button id="paretto" (click)="this.buildParetto()">Build Paretto</button>
+  <button id="histogram" (click)="this.buildHistogram()">Build Histogram</button>
+</div>
+
+<div class="flexContainer" id="paretoGraph" *ngIf="this.displayParettoGraph">
+  <app-pareto>
+  </app-pareto>
+</div>
+
+<div class="flexContainer" id="histogramGraph" *ngIf="this.displayHistogramGraph">
+  <app-histogram>
+  </app-histogram>
+</div>

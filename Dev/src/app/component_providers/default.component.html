@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="this.determineUserRole()">
+  <app-wearer-home-screen *ngSwitchCase="1"></app-wearer-home-screen>
+  <app-badge-add-bulk *ngSwitchCase="2"></app-badge-add-bulk>
+  <app-analyte-exposure *ngSwitchCase="3"></app-analyte-exposure>
+  <app-analyzed-data-selection *ngSwitchCase="4"></app-analyzed-data-selection>
+  <app-analyzed-data-selection *ngSwitchCase="5"></app-analyzed-data-selection>
+  <app-unlock-account *ngSwitchCase="6"></app-unlock-account>
+  <app-custom-data *ngSwitchCase="7"></app-custom-data>
+  <app-analyzed-data-selection *ngSwitchCase="8"></app-analyzed-data-selection>
+  <app-grid *ngSwitchDefault></app-grid>
+</ng-container>

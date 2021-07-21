@@ -1,0 +1,190 @@
+<div class="container-fluid" style="display: flex">
+  <div class="row">
+    <div>
+      <h3>
+        <b><strong>Upload Report</strong></b>
+      </h3>
+      <div class="description">
+        <span class="description"
+          >Select desired badge and corresponding tube number to upload
+          report.</span
+        >
+      </div>
+      <br />
+    </div>
+    <div class="panel-group col-lg-6">
+      <div
+        class="panel"
+        [ngClass]="badge.getClassForCurrentState()"
+        *ngFor="let badge of this.badgeForms"
+      >
+        <div class="panel-heading" appCollapse appHover>
+          <h4 class="panel-title">
+            Badge Serial Number:
+            <span *ngIf="badge">{{ badge.name }}</span>
+          </h4>
+        </div>
+        <div class="panel-collapse collapse">
+          <div class="panel-body" *ngIf="this.formLoaded">
+            <div *ngIf="!badge.damaged; then thenBlock; else elseBlock"></div>
+            <ng-template #thenBlock>
+              <app-token-report
+                *ngFor="let token of badge.tokenReports"
+                [tokenFormData]="token"
+                [tokenTypeList]="this.tokenTypeList"
+                [badgeList]="this.badgeList"
+                [analyteList]="this.analyteList"
+                [methodList]="this.methodList"
+                (queuedFile)="this.addToQueue($event)"
+                (stateChanged)="badge.handleStateChange($event)"
+              ></app-token-report>
+            </ng-template>
+            <ng-template #elseBlock>
+              <label style="max-width: unset; display: unset"
+                >Comments:
+                <textarea
+                  placeholder="Enter any relevant information about the damaged badge."
+                  innerHTML="{{ badge.damagedComments }}"
+                  [(ngModel)]="badge.damagedComments"
+                ></textarea>
+              </label>
+              <button
+                style="float: right"
+                (click)="submitDamagedBadgeReport(badge)"
+              >
+                Save
+              </button>
+            </ng-template>
+            <label style="display: flex">
+              <input
+                type="checkbox"
+                id="damagedValue"
+                style="margin-right: 5px"
+                [(ngModel)]="badge.damaged"
+                (ngModelChange)="badge.setStateValue('MODIFIED')"
+              />
+              Check if badge is damaged and cannot be analyzed.
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <h3>Upload queue</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Badge</th>
+            <th>Token</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of this.queue">
+            <td nowrap>{{ entry[0].outerIndex }}</td>
+            <td style="text-align: center">{{ entry[0].innerIndex }}</td>
+            <td>
+              <strong>{{ entry[1].file.name }}</strong>
+            </td>
+            <td *ngIf="this.fileUploader.options.isHTML5" nowrap>
+              {{ entry[1].file.size / 1024 / 1024 | number: ".2" }} MB
+            </td>
+            <td *ngIf="this.fileUploader.options.isHTML5">
+              <div class="progress" style="margin-bottom: 0">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [ngStyle]="{ width: entry[1].progress + '%' }"
+                ></div>
+              </div>
+            </td>
+            <td class="text-center">
+              <span *ngIf="entry[1].isSuccess"
+                ><i class="glyphicon glyphicon-ok"></i
+              ></span>
+              <span *ngIf="entry[1].isCancel"
+                ><i class="glyphicon glyphicon-ban-circle"></i
+              ></span>
+              <span *ngIf="entry[1].isError"
+                ><i class="glyphicon glyphicon-remove"></i
+              ></span>
+              <span *ngIf="entry[1].isSuccess && entry[1].isQuarantined"
+                ><i class="glyphicon glyphicon-warning-sign"></i
+              ></span>
+            </td>
+            <td nowrap>
+              <button
+                type="button"
+                class="btn btn-success btn-xs"
+                (click)="entry[1].upload()"
+                [disabled]="
+                  entry[1].isReady || entry[1].isUploading || entry[1].isSuccess
+                "
+              >
+                <span class="glyphicon glyphicon-upload"></span> Upload
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning btn-xs"
+                (click)="entry[1].cancel()"
+                [disabled]="!entry[1].isUploading"
+              >
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-xs"
+                (click)="removeFromQueue(entry[0])"
+              >
+                <span class="glyphicon glyphicon-trash"></span> Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tokenElement">
+        <div>
+          Queue progress:
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [ngStyle]="{ width: queueProgress + '%' }"
+            ></div>
+          </div>
+        </div>
+        <div class="buttonGroup">
+          <button
+            type="button"
+            class="btn btn-success btn-s"
+            (click)="this.uploadAll()"
+            [disabled]="!this.getNotUploadedItemsCount()"
+          >
+            <span class="glyphicon glyphicon-upload"></span> Upload all
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-s"
+            (click)="this.cancelAll()"
+            [disabled]="!this.getUploadingItemsCount()"
+          >
+            <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-s"
+            (click)="removeAll()"
+            [disabled]="!this.queue.length"
+          >
+            <span class="glyphicon glyphicon-trash"></span> Remove all
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

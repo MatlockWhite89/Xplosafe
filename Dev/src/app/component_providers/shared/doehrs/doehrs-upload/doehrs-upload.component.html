@@ -1,0 +1,550 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Doehrs Information</strong></b>
+    </h3>
+    <div class="description">
+      <span class="description"
+        >Select a Doehrs Sample from the drop down.</span
+      >
+    </div>
+    <br />
+  </div>
+  <div *ngIf="this.showForm">
+    <form [formGroup]="doehrsInformation" class="flexContainer">
+      <div class="flexElement">
+        <div class="input-group flexElement">
+          <label> Doehrs Sample: </label>
+          <select id="sample" formControlName="sample" placeHolder="Sample Id">
+            <option value="null"></option>
+            <option
+              *ngFor="let sample of this.doehrsSample"
+              value="{{ sample?.SampleId }}"
+            >
+              {{ sample?.LabSampleId }}
+            </option>
+          </select>
+        </div>
+        <div class="btn">
+          <button id="submit" (click)="this.submit()">Select</button>
+          <button
+            id="exportTxt"
+            (click)="this.exportTXT()"
+            *ngIf="this.selectedSample"
+          >
+            Export as TXT
+          </button>
+          <button
+            id="exportXml"
+            (click)="this.exportXML()"
+            *ngIf="this.selectedSample"
+          >
+            Export as XML
+          </button>
+        </div>
+
+        <div *ngIf="this.selectedSample">
+          <table id="doehrsData">
+            <!--Lab Information-->
+            <div>
+              <tr>
+                <span
+                  ><b
+                    ><strong
+                      >&lt;?xml version= "1.0" encoding="UTF-8"&gt;</strong
+                    ></b
+                  ></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;IHLabSampleData</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b
+                    ><strong
+                      >xsi:schemaLocation="https://doehrs-ih.csd.disa.mil/IHLabSampleData
+                      IHLabSampleData.xsd"</strong
+                    ></b
+                  ></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b
+                    ><strong
+                      >xmlns=
+                      "https://doehrs-ih.csd.disa.mil/IHLabSampleData"</strong
+                    ></b
+                  ></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b
+                    ><strong
+                      >xmlns:xsi=
+                      "https://www.w3.org/2001/XMLSchema-instance"&gt;</strong
+                    ></b
+                  ></span
+                >
+              </tr>
+            </div>
+            <div *ngIf="this.selectedLab">
+              <tr>
+                <span
+                  ><b><strong>&lt;Lab&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;LabName&gt;</strong></b>
+                  {{ this.selectedLab.LabName }}
+                  <b><strong>&lt;/LabName&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;LabCode&gt;</strong></b>
+                  {{ this.selectedLab.LabCode }}
+                  <b><strong>&lt;/LabCode&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;POCName&gt;</strong></b>
+                  {{ this.selectedLab.POCName }}
+                  <b><strong>&lt;/POCName&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;POCEmail&gt;</strong></b>
+                  {{ this.selectedLab.POCEmail }}
+                  <b><strong>&lt;/POCEmail&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;POCPhone&gt;</strong></b>
+                  {{ this.selectedLab.POCPhone }}
+                  <b><strong>&lt;/POCPhone&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;/Lab&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+
+            <!--Sample Information-->
+            <div>
+              <tr>
+                <span
+                  ><b><strong>&lt;Sample&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+            <div *ngIf="this.selectedSample">
+              <tr>
+                <span
+                  ><b><strong>&lt;SampleData&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;SampleId&gt;</strong></b>
+                  {{ this.selectedSample.SampleId }}
+                  <b><strong>&lt;/SampleId&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;SampleFieldId&gt;</strong></b>
+                  {{ this.selectedSample.SampleFieldId }}
+                  <b><strong>&lt;/SampleFieldId&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;LabSampleComments&gt;</strong></b>
+                  {{ this.selectedSample.LabSampleComments }}
+                  <b><strong>&lt;/LabSampleComments&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;SampleAnalyzedDate&gt;</strong></b>
+                  {{ this.selectedSample.SampleAnalyzedDate }}
+                  <b><strong>&lt;/SampleAnalyzedDate&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;ResultsReportedDate&gt;</strong></b>
+                  {{ this.selectedSample.ResultsReportedDate }}
+                  <b><strong>&lt;/ResultsReportedDate&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;ResultsReturnedDate&gt;</strong></b>
+                  {{ this.selectedSample.ResultsReturnedDate }}
+                  <b><strong>&lt;/ResultsReturnedDate&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;PostSampledWeight&gt;</strong></b>
+                  {{ this.selectedSample.PostSampledWeight }}
+                  <b><strong>&lt;/PostSampledWeight&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;NetWeight&gt;</strong></b>
+                  {{ this.selectedSample.NetWeight }}
+                  <b><strong>&lt;/NetWeight&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;/SampleData&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+
+            <!--Chain Of Custody Information-->
+            <div>
+              <tr>
+                <span
+                  ><b><strong>&lt;ChainOfCustodyData&gt;</strong></b></span
+                >
+              </tr>
+              <div *ngFor="let coc of this.selectedChainOfCustody">
+                <tr>
+                  <span
+                    ><b><strong>&lt;ChainOfCustody&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;RelinquishedBy&gt;</strong></b>
+                    {{ this.coc.RelinquishedBy }}
+                    <b><strong>&lt;/RelinquishedBy&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;RelinquishedDateTime&gt;</strong></b>
+                    {{ this.coc.RelinquishedDateTime }}
+                    <b><strong>&lt;/RelinquishedDateTime&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReceivedBy&gt;</strong></b>
+                    {{ this.coc.ReceivedBy }}
+                    <b><strong>&lt;/ReceivedBy&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReceivedDateTime&gt;</strong></b>
+                    {{ this.coc.ReceivedDateTime }}
+                    <b><strong>&lt;/ReceivedDateTime&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;Comments&gt;</strong></b>
+                    {{ this.coc.Comments }}
+                    <b><strong>&lt;/Comments&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;/ChainOfCustody&gt;</strong></b></span
+                  >
+                </tr>
+              </div>
+              <tr>
+                <span
+                  ><b><strong>&lt;/ChainOfCustodyData&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+
+            <!--Analyte Result Data Information-->
+            <div>
+              <tr>
+                <span
+                  ><b><strong>&lt;AnalyteResultData&gt;</strong></b></span
+                >
+              </tr>
+              <div *ngFor="let res of this.selectedAnalyteResultData">
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyteResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyteIdentifier&gt;</strong></b>
+                    {{ this.res.AnalyteIdentifier }}
+                    <b><strong>&lt;/AnalyteIdentifier&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;CASNumber&gt;</strong></b>
+                    {{ this.res.CASNumber }}
+                    <b><strong>&lt;/CasNumber&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyteName&gt;</strong></b>
+                    {{ this.res.AnalyteName }}
+                    <b><strong>&lt;/AnalyteName&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyzedDateTime&gt;</strong></b>
+                    {{ this.res.AnalyzedDateTime }}
+                    <b><strong>&lt;/AnalyzedDateTime&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;Inspirability&gt;</strong></b>
+                    {{ this.res.Inspirability }}
+                    <b><strong>&lt;/Inspirability&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyticalMethod&gt;</strong></b>
+                    {{ this.res.AnalyticalMethod }}
+                    <b><strong>&lt;/AnalyticalMethod&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassMeasuredResult&gt;</strong></b>
+                    {{ this.res.MassMeasuredResult }}
+                    <b><strong>&lt;/MassMeasuredResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassMeasuredResultQualifier&gt;</strong></b>
+                    {{ this.res.MassMeasuredResultQualifier }}
+                    <b
+                      ><strong>&lt;/MassMeasuredResultQualifier&gt;</strong></b
+                    ></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassCorrectedResult&gt;</strong></b>
+                    {{ this.res.MassCorrectedResult }}
+                    <b><strong>&lt;/MassCorrectedResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b
+                      ><strong>&lt;MassCorrectedResultQualifier&gt;</strong></b
+                    >
+                    {{ this.res.MassCorrectedResultQualifier }}
+                    <b
+                      ><strong>&lt;/MassCorrectedResultQualifier&gt;</strong></b
+                    ></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassResultUnit&gt;</strong></b>
+                    {{ this.res.MassResultUnit }}
+                    <b><strong>&lt;/MassResultUnit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ResultNotDetected&gt;</strong></b>
+                    {{ this.res.ResultNotDetected }}
+                    <b><strong>&lt;/ResultNotDetected&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ResultComments&gt;</strong></b>
+                    {{ this.res.ResultComments }}
+                    <b><strong>&lt;/ResultComments&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReportingLimit&gt;</strong></b>
+                    {{ this.res.ReportingLimit }}
+                    <b><strong>&lt;/ReportingLimit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReportingLimitUnit&gt;</strong></b>
+                    {{ this.res.ReportingLimitUnit }}
+                    <b><strong>&lt;/ReportingLimitUnit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;/AnalyteResult&gt;</strong></b></span
+                  >
+                </tr>
+
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyteResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;CASNumber&gt;</strong></b>
+                    {{ this.res.CASNumber }}
+                    <b><strong>&lt;/CasNumber&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyteName&gt;</strong></b>
+                    {{ this.res.AnalyteName }}
+                    <b><strong>&lt;/AnalyteName&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyzedDateTime&gt;</strong></b>
+                    {{ this.res.AnalyzedDateTime }}
+                    <b><strong>&lt;/AnalyzedDateTime&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;Inspirability&gt;</strong></b>
+                    {{ this.res.Inspirability }}
+                    <b><strong>&lt;/Inspirability&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;AnalyticalMethod&gt;</strong></b>
+                    {{ this.res.AnalyticalMethod }}
+                    <b><strong>&lt;/AnalyticalMethod&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassMeasuredResult&gt;</strong></b>
+                    {{ this.res.MassMeasuredResult }}
+                    <b><strong>&lt;/MassMeasuredResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassMeasuredResultQualifier&gt;</strong></b>
+                    {{ this.res.MassMeasuredResultQualifier }}
+                    <b
+                      ><strong>&lt;/MassMeasuredResultQualifier&gt;</strong></b
+                    ></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassCorrectedResult&gt;</strong></b>
+                    {{ this.res.MassCorrectedResult }}
+                    <b><strong>&lt;/MassCorrectedResult&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b
+                      ><strong>&lt;MassCorrectedResultQualifier&gt;</strong></b
+                    >
+                    {{ this.res.MassCorrectedResultQualifier }}
+                    <b
+                      ><strong>&lt;/MassCorrectedResultQualifier&gt;</strong></b
+                    ></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;MassResultUnit&gt;</strong></b>
+                    {{ this.res.MassResultUnit }}
+                    <b><strong>&lt;/MassResultUnit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ResultNotDetected&gt;</strong></b>
+                    {{ this.res.ResultNotDetected }}
+                    <b><strong>&lt;/ResultNotDetected&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ResultComments&gt;</strong></b>
+                    {{ this.res.ResultComments }}
+                    <b><strong>&lt;/ResultComments&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReportingLimit&gt;</strong></b>
+                    {{ this.res.ReportingLimit }}
+                    <b><strong>&lt;/ReportingLimit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;ReportingLimitUnit&gt;</strong></b>
+                    {{ this.res.ReportingLimitUnit }}
+                    <b><strong>&lt;/ReportingLimitUnit&gt;</strong></b></span
+                  >
+                </tr>
+                <tr>
+                  <span
+                    ><b><strong>&lt;/AnalyteResult&gt;</strong></b></span
+                  >
+                </tr>
+              </div>
+              <tr>
+                <span
+                  ><b><strong>&lt;/AnalyteResultData&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+
+            <div>
+              <tr>
+                <span
+                  ><b><strong>&lt;/Sample&gt;</strong></b></span
+                >
+              </tr>
+              <tr>
+                <span
+                  ><b><strong>&lt;/IHLabSampleData&gt;</strong></b></span
+                >
+              </tr>
+            </div>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

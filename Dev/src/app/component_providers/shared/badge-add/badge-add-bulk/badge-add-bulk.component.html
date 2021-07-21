@@ -1,0 +1,111 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Add Multiple Badges</strong></b>
+    </h3>
+    <div class="description"><span class="description">A number of badges will be made using the following values:</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement">
+    <form
+      [formGroup]="badgeInformation"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label class="labelValue">
+          BSN Starting Index:
+        </label>
+        <input
+          formControlName="badgeSerialNumberFirst"
+          type="number"
+          id="badgeSerialNumberFirst"
+          placeholder="1"
+        />
+        <label class="dashLabel">-</label>
+        <input
+          formControlName="badgeSerialNumberSecond"
+          type="number"
+          id="badgeSerialNumberSecond"
+          placeholder="0001"
+        />
+        <label class="dashLabel">-</label>
+        <input
+          formControlName="badgeSerialNumberThird"
+          type="number"
+          id="badgeSerialNumberThird"
+          placeholder="001"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label class="labelValue">
+          Batch Group:
+        </label>
+        <input
+          formControlName="batchGroup"
+          placeholder="BatchGroup"
+          id="batchGroup"
+          type="text"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label class="labelValue">
+          Number Of Tokens:
+        </label>
+        <input
+          formControlName="numberOfTokens"
+          placeholder="NumberOfTokens"
+          id="numberOfTokens"
+          type="number"
+          (keyup)="displayTokenParameters()"
+          (change)="displayTokenParameters()"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label class="labelValue">
+          Number Of Badges:
+        </label>
+        <input
+          formControlName="numberOfBadges"
+          type="number"
+          id="numberOfBadges"
+          placeholder="NumberOfBadges"
+        />
+      </div>
+      <div class="input-group flexElement">
+        <label>
+          Expiration Date:
+        </label>
+        <input
+          formControlName="expirationDate"
+          type="datetime-local"
+          id="expirationDate"
+          placeholder="ExpirationDate"
+        />
+      </div>
+      <div class="flexElement" *ngIf="this.displayTokens">
+        <div class="flexElement" *ngFor="let t of this.tokens">
+          <tr id="token{{t.token_id}}">
+            <app-token-values
+              (state)="handleStateUpdate($event)"
+              [token]="t">
+            </app-token-values>
+          </tr>
+        </div>
+      </div>
+      <div class="flexElement">
+        <button
+          [disabled]="!badgeInformation.valid"
+          class="btn btn-default"
+          type="submit"
+          id="submitButton"
+          (click)="checkBadgeData()"
+        >
+          Add Badges
+        </button>
+      </div>
+      <div class="flexElement">
+        <app-grid></app-grid>
+      </div>
+    </form>
+  </div>
+</div>

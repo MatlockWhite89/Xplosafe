@@ -1,0 +1,158 @@
+<div class="flexContainer">
+  <div class="flexElement">
+    <h3>
+      <b><strong>Analyte-Exposure</strong></b>
+    </h3>
+    <div class="description"><span class="description">Select which Organizations' Exposure Ratings you wish to view.</span></div>
+    <div></div>
+  </div>
+  <div class="flexElement"></div>
+  <div class="flexElement">
+    <form
+      [formGroup]="organizationSelection"
+      class="flexContainer"
+    >
+      <div class="input-group flexElement">
+        <label> Organization Exposure Ratings: </label>
+        <select
+          id="analyteOrganization"
+          formControlName="analyteOrganization"
+        >
+          <option value=0></option>
+          <option value=1>Osha</option>
+          <option value=2>Niosh</option>
+          <option value=3>ACGIH</option>
+        </select>
+      </div>
+    </form>
+    <form
+      [formGroup]="analyteInformation"
+      class="flexContainer"
+    >
+      <div class="flexElement"
+      *ngIf="selectedOrganization > 0">
+        <div class="input-group flexElement">
+          <label> Analyte: </label>
+          <select
+            id="analytes"
+            formControlName="analytes"
+            placeHolder="AnalyteName"
+          >
+            <option value=null></option>
+            <option *ngFor="let a of this.analytesList" value="{{ a?.cas_number }}">
+              {{ a?.analyte_name }}
+            </option>
+          </select>
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            Molecular Weight:
+          </label>
+          <input
+            formControlName="molecularWeight"
+            type="text"
+            id="molecularWeight"
+            placeholder="MolecularWeight"
+          />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            OSHA PPM Value:
+          </label>
+            <input
+              formControlName="oshaPPMValue"
+              type="text"
+              id="oshaPPMValue"
+              placeholder="OshaPPMValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            OSHA mg/m3 Value:
+          </label>
+            <input
+              formControlName="oshaMgValue"
+              type="text"
+              id="oshaMgValue"
+              placeholder="OshaMgValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            TWA Value:
+          </label>
+            <input
+              formControlName="twaValue"
+              type="text"
+              id="twaValue"
+              placeholder="TWAValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            TWA (St) Value:
+          </label>
+            <input
+              formControlName="twaStValue"
+              type="text"
+              id="twaStValue"
+              placeholder="TWAStValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            TWA (C) Value:
+          </label>
+            <input
+              formControlName="twaCValue"
+              type="text"
+              id="twaCValue"
+              placeholder="TWACValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            Osu Sampling Rate mL/min:
+          </label>
+            <input
+              formControlName="osuSamplingRateValue"
+              type="text"
+              id="osuSamplingRateValue"
+              placeholder="OsuSamplingRateValue"
+            />
+        </div>
+        <div class="input-group flexElement">
+          <label>
+            Reporting Limit:
+          </label>
+          <input
+            formControlName="detectionLimitValue"
+            type="text"
+            id="detectionLimitValue"
+            placeholder="ReportingLimitValue"
+          />
+          <select
+            id="detectionUnits"
+            formControlName="detectionUnits"
+          >
+            <option value=1>PPM</option>
+            <option value=1000>PPB</option>
+          </select>
+        </div>
+        <div class="flexElement">
+          <button
+            class="btn btn-default"
+            type="submit"
+            id="submitButton"
+            (click)="updateAnalyteCheck()"
+          >
+            Update Analyte
+          </button>
+        </div>
+      </div>
+      <div class="flexElement">
+        <app-grid></app-grid>
+      </div>
+    </form>
+  </div>
+</div>

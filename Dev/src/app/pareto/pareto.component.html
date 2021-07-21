@@ -1,0 +1,17 @@
+<fieldset>
+  <legend id="fieldset-legend">Members:</legend>
+  <ul>
+    <li class="legend-members" *ngFor="let g of this.bars; let i = index">
+      {{ i + 1 }}. <span [ngStyle]="{ color: g.colour }"> {{ g.colName }}</span>
+      <span class="tooltiptext">Value: {{g.height}} {{this.graphService.getUnits()}}</span>
+    </li>
+  </ul>
+</fieldset>
+
+<div class="flexContainer" id="paretoGraph" *ngIf="this.displayGraph">
+  <app-pareto-line
+    [bars]="this.bars"
+    [dots]="this.dots"
+    [lines]="this.lines">
+  </app-pareto-line>
+</div>
